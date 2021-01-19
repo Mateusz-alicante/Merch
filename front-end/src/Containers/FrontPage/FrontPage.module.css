@@ -1,0 +1,9 @@
+.textContainer {
+    padding: 3em;
+}
+
+@media (max-width:480px) {
+    .textContainer {
+        padding: 1em;
+    }
+}
