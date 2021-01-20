@@ -33,9 +33,37 @@
     opacity: 1;
 }
 
+.navMobileInnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navMobileContainer a {
+    display: inline-block;
+    outline: none;
+    text-decoration: none;
+    opacity: .7;
+    padding: .5em .5em;
+    color: black;
+    transition: opacity .2s ease-in-out;
+    cursor: pointer;
+}
+.navMobileContainer a:hover,
+.navMobileContainer a:focus {
+    opacity: 1;
+}
+
 .mobileNavHeader {
     display: none;
 }
+
+.navMobileContainer {
+    background-color: wheat;
+    transition: all ease-in-out .5s;
+    box-shadow:         inset 0 0 5px #3b3b3b;
+}
+
 
 @media (max-width:480px) {
     .mobileNavHeader {
