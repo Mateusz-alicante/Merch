@@ -17,7 +17,7 @@ const Nav = () => {
             <div className={styles.navHeader}>
                 <h1>Site Name</h1>
                 <nav className={styles.navContainer}>
-                    <span>Home</span>
+                    <span><NavLink className={styles.navLink} to={'/'}>Home</NavLink></span>
                     <span>Store</span>
                     <span>About</span>
                     <span><NavLink className={styles.navLink} to={'/auth/login'}>My account</NavLink></span>
@@ -28,7 +28,7 @@ const Nav = () => {
             </div>
             <div className={styles.navMobileContainer} style={{height: menuOpen ? "10em" : "0"}}>
                 <nav className={styles.navMobileInnerContainer}>
-                    <span><FontAwesomeIcon icon={faHome} /> Home</span>
+                    <span><NavLink className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
                     <span><FontAwesomeIcon icon={faShoppingCart} /> Store</span>
                     <span><FontAwesomeIcon icon={faInfoCircle} /> About</span>
                     <span><NavLink className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} /> My account</NavLink></span>
