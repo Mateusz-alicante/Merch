@@ -3,24 +3,27 @@ import React from 'react'
 import styles from './Router.module.css'
 
 import {
-    BrowserRouter,
     Switch,
     Route,
-    Link
 } from "react-router-dom";
 
 import Test from '../Test/Test'
 import FrontPage from '../FrontPage/FrontPage'
 
+import Authrouter from './NestedRouters/Auth'
+
 const Router = () => {
     return (
         <div className={styles.outerContainer}>
             <div className={styles.container}>
-                <BrowserRouter>
                     <Switch>
 
                         <Route path="/" exact>
                             <FrontPage />
+                        </Route>
+
+                        <Route path="/auth" exact={false}>
+                            <Authrouter />
                         </Route>
 
                         <Route path="/test">
@@ -28,7 +31,6 @@ const Router = () => {
                         </Route>
 
                     </Switch>
-                </BrowserRouter>
             </div>
         </div>
     )

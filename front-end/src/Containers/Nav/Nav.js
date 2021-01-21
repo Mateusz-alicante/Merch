@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './Nav.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,21 +17,21 @@ const Nav = () => {
             <div className={styles.navHeader}>
                 <h1>Site Name</h1>
                 <nav className={styles.navContainer}>
-                    <a>Home</a>
-                    <a>Store</a>
-                    <a>About</a>
-                    <a>My account</a>
+                    <span>Home</span>
+                    <span>Store</span>
+                    <span>About</span>
+                    <span><NavLink className={styles.navLink} to={'/auth/login'}>My account</NavLink></span>
                 </nav>
                 <nav className={styles.mobileNavHeader} onClick={() => setOpen(!menuOpen)}>
                     <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} />
                 </nav>
             </div>
-            <div className={styles.navMobileContainer} style={{height: menuOpen ? "10em" : "0", opacity: menuOpen ? "100%" : "0"}}>
+            <div className={styles.navMobileContainer} style={{height: menuOpen ? "10em" : "0"}}>
                 <nav className={styles.navMobileInnerContainer}>
-                    <a><FontAwesomeIcon icon={faHome} /> Home</a>
-                    <a><FontAwesomeIcon icon={faShoppingCart} /> Store</a>
-                    <a><FontAwesomeIcon icon={faInfoCircle} /> About</a>
-                    <a><FontAwesomeIcon icon={faAddressCard} /> My account</a>
+                    <span><FontAwesomeIcon icon={faHome} /> Home</span>
+                    <span><FontAwesomeIcon icon={faShoppingCart} /> Store</span>
+                    <span><FontAwesomeIcon icon={faInfoCircle} /> About</span>
+                    <span><NavLink className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} /> My account</NavLink></span>
                 </nav>
             </div>
         </div>
