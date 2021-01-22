@@ -5,6 +5,7 @@ const port = process.env.PORT || 5000
 
 // require dependency files
 require('dotenv').config()
+require('./utils/db/init')
 
 app.use(express.static(path.join(__dirname, '/../front-end/build')));
 app.set('trust proxy', 1);
@@ -12,6 +13,9 @@ app.set('trust proxy', 1);
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+const AuthRouter = require('./utils/routers/Auth/Auth')
+app.use("/api/auth", AuthRouter)
 
 
 app.get('/api/test', (req, res) => {

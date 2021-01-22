@@ -3,8 +3,14 @@ import styles from './SimpleButton.module.css'
 
 
 const SimpleButton = (props) => {
+
+    const submitForm = (e) => {
+        e.preventDefault()
+        props.submit()
+    }
+
     return (
-        <button className={styles.button}>
+        <button disabled={props.disabled} onClick={submitForm} className={styles.button}>
             {props.children}
         </button>
     )

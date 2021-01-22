@@ -28,9 +28,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try {
-
+        console.log(req.body)
         if (!isEmail(req.body.email)) {
-            throw new Error("Email is invalid")
+            res.status = 422
+            res.send("The email provided is not an valid email")
         }
 
         req.body.password = await bcrypt.hash(req.body.password, 10)

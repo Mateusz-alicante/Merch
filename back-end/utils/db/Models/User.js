@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         unique: true,
         minlength: 5
     },
+    year: {
+        type: Number,
+    },
+    section: {
+        type: String,
+    },
     password: String,
     isAdmin: {type: Boolean, default: false},
     createdAt: {
