@@ -10,6 +10,7 @@ const Login = () => {
     return (
         <div>
             <ImageHolder image={ImagePeople} ><div className={styles.SignUpButton}>If you still dont have an account, create one now!</div></ImageHolder>
+            
         </div>
     )
 }
