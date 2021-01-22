@@ -3,7 +3,7 @@ import {
     Route,
 } from "react-router-dom";
 
-import Login from '../../User/Auth/Login'
+import Login from '../../User/Auth/Login/Login'
 
 const App = () => {
     return (
