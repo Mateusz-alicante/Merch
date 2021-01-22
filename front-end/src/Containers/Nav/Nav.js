@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 import styles from './Nav.module.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes, faShoppingCart, faHome, faAddressCard, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
-const Nav = () => {
+const Nav = (props) => {
 
     const [menuOpen, setOpen] = useState(false)
 
@@ -20,7 +21,7 @@ const Nav = () => {
                     <span><NavLink className={styles.navLink} to={'/'}>Home</NavLink></span>
                     <span>Store</span>
                     <span>About</span>
-                    <span><NavLink className={styles.navLink} to={'/auth/login'}>My account</NavLink></span>
+                    <span><NavLink className={styles.navLink} to={'/auth/login'}>{props.redux.auth.isLoggedIn ? "My account" : "Log in"}</NavLink></span>
                 </nav>
                 <nav className={styles.mobileNavHeader} onClick={() => setOpen(!menuOpen)}>
                     <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} />
@@ -31,11 +32,17 @@ const Nav = () => {
                     <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
                     <span><FontAwesomeIcon icon={faShoppingCart} /> Store</span>
                     <span><FontAwesomeIcon icon={faInfoCircle} /> About</span>
-                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} /> My account</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} />My account</NavLink></span>
                 </nav>
             </div>
         </div>
     )
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+    return {
+        redux: state
+    }
+}
+
+export default connect(mapStateToProps)(Nav)

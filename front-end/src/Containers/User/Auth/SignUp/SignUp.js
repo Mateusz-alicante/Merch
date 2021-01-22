@@ -40,8 +40,8 @@ const SignUp = (props) => {
             email,
             name,
             password,
-            year,
-            section
+            year: parseInt(year.value),
+            section: section.value
         })
         if (response && response.status === 200 && response.data.token) {
             props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
@@ -51,9 +51,10 @@ const SignUp = (props) => {
                 position: toast.POSITION.BOTTOM_RIGHT,
               })
         } else {
+            setStatus(undefined)
             toast.error('Login unsuccessful, check the credencials and try again' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
-              })
+            })
         }
     }
 

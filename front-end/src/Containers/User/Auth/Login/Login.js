@@ -1,4 +1,6 @@
 import React, {useState} from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import styles from './Login.module.css'
 
 import SignUpButton from '../SignUpButton/SignUpButton'
@@ -8,21 +10,54 @@ import SimpleButton from '../../../../Components/Forms/Button/SimpleButton/Simpl
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
+import setAuthInfo from '../../../../Utils/Redux/Actions/Auth'
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
 
-    const [email, setEmail] = useState(undefined)
-    const [password, setpassword] = useState(undefined)
+    const [email, setEmail] = useState("")
+    const [password, setpassword] = useState("")
+    const [status, setStatus] = useState(undefined)
+    const history = useHistory()
+
+    const RequestLogiIn = async () => {
+        setStatus('loading')
+        const response = await axios.post('/api/auth/login', {
+            email,
+            password
+        })
+        if (response && response.status === 200 && response.data.token) {
+            props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
+            setStatus(undefined)
+            history.push('/')
+            toast.success('Login successful' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
+        } else {
+            setStatus(undefined)
+            toast.error('Login unsuccessful, check the credencials and try again' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
+        }
+    }
+
     return (
         <div>
             <SignUpButton linkTo={'/auth/signup'} text={"If you still dont have an account, create one now!"} />
             <form className={styles.LoginForm}>
                 <SimpleTextInput value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
                 <SimpleTextInput value={password} onChange={setpassword} placeholder={"password"} label={"Password:"}/>
-                <SimpleButton>Log in   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
+                <SimpleButton disabled={status == "loading"} submit={RequestLogiIn}>Log in   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
             </form>
         </div>
     )
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return {
+        redux: state
+    }
+}
+
+export default connect(mapStateToProps)(Login)

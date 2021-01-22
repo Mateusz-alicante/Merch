@@ -28,10 +28,10 @@ router.post('/login', async (req, res) => {
 
 router.post('/signup', async (req, res) => {
     try {
-        console.log(req.body)
         if (!isEmail(req.body.email)) {
-            res.status = 422
-            res.send("The email provided is not an valid email")
+            throw new Error("The provided email is not an email")
+        } else if (req.body.password.length < 1) {
+            throw new Error("Invalid password")
         }
 
         req.body.password = await bcrypt.hash(req.body.password, 10)
@@ -40,10 +40,11 @@ router.post('/signup', async (req, res) => {
 
         token = jwt.sign({
             data: user._id
-          }, process.env.JWT_SECRET, { expiresIn: '3h' });
+          }, process.env.JWT_SECRET, { expiresIn: '24h' });
 
         return res.json({staus: "Ok", token: token, isAdmin: user.isAdmin, name: user.name, email: user.email})
     } catch (e) {
+        console.log(e)
         res.status = 400
         res.json({error: e})
     }

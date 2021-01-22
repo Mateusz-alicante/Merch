@@ -5,20 +5,30 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         unique: true,
-        minlength: 3
+        minlength: 3,
+        required: true
     },
     email: {
         type: String,
         unique: true,
-        minlength: 5
+        minlength: 5,
+        required: true
     },
     year: {
         type: Number,
+        minlength: 1,
+        required: true
     },
     section: {
         type: String,
+        minlength: 1,
+        required: true
     },
-    password: String,
+    password: {
+        type: String,
+        minlength: 3,
+        required: true
+    },
     isAdmin: {type: Boolean, default: false},
     createdAt: {
         type: Date,
