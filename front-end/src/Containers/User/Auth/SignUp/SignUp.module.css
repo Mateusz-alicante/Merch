@@ -1,0 +1,6 @@
+.SignUpForm {
+    margin: 2% auto;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}

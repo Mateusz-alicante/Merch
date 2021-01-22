@@ -13,7 +13,7 @@ const Nav = () => {
 
 
     return (
-        <div>
+        <div className={styles.outerContainer}>
             <div className={styles.navHeader}>
                 <h1>Site Name</h1>
                 <nav className={styles.navContainer}>

@@ -12,6 +12,12 @@
     position: relative;
 }
 
+.SignUpButton a {
+    text-decoration: none;
+    color: white;
+}
+
+
 @media (min-width:600px) {
     .SignUpButton::after {
         content: ">";

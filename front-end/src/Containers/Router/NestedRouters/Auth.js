@@ -4,6 +4,7 @@ import {
 } from "react-router-dom";
 
 import Login from '../../User/Auth/Login/Login'
+import SignUp from '../../User/Auth/SignUp/SignUp'
 
 const App = () => {
     return (
@@ -13,7 +14,7 @@ const App = () => {
             </Route>
 
             <Route path='/auth/signup'>
-                <p>Sign Up</p>
+                <SignUp />
             </Route>
         </>
     )
