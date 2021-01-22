@@ -4,3 +4,9 @@
     flex-direction: column;
     width: 60%;
 }
+
+@media (max-width:900px) {
+    .SignUpForm {
+        width: 100%;
+    }
+}

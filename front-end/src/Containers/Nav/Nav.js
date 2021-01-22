@@ -28,10 +28,10 @@ const Nav = () => {
             </div>
             <div className={styles.navMobileContainer} style={{height: menuOpen ? "10em" : "0"}}>
                 <nav className={styles.navMobileInnerContainer}>
-                    <span><NavLink className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
                     <span><FontAwesomeIcon icon={faShoppingCart} /> Store</span>
                     <span><FontAwesomeIcon icon={faInfoCircle} /> About</span>
-                    <span><NavLink className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} /> My account</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} /> My account</NavLink></span>
                 </nav>
             </div>
         </div>

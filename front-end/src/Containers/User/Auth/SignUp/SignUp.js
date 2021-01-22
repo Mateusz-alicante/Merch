@@ -1,10 +1,12 @@
 import React, {useState} from 'react'
 import styles from './SignUp.module.css'
 
-
 import SignUpButton from '../SignUpButton/SignUpButton'
 import SimpleTextInput from '../../../../Components/Forms/Input/SimpleTextInput/SimpleTextInput'
 import SimpleButton from '../../../../Components/Forms/Button/SimpleButton/SimpleButton'
+import SimpleSelect from '../../../../Components/Forms/Input/SelectInput/SelectInput'
+
+import SignUpSelectOptions from './SignUpSelectOptions'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
@@ -16,12 +18,15 @@ const SignUp = () => {
     const [password, setPassword] = useState(undefined)
     const [repeatPassword, setRepeatPassword] = useState(undefined)
     const [name, setName] = useState(undefined)
+    const [year, setYear] = useState(undefined)
+
     return (
         <div>
             <SignUpButton linkTo={'/auth/login'} text={"If you already have an account, log in now!"} />
             <form className={styles.SignUpForm}>
                 <SimpleTextInput value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
                 <SimpleTextInput value={name} onChange={setName} placeholder={"name"} label={"Full name:"}/>
+                <SimpleSelect label={"Year:"} value={year} onChange={value => setYear(value)} options={SignUpSelectOptions.year} />
                 <SimpleTextInput value={password} onChange={setPassword} placeholder={"password"} label={"Password:"}/>
                 <SimpleTextInput value={repeatPassword} onChange={setRepeatPassword} placeholder={"confirm password"} label={"Confirm password:"}/>
                 <SimpleButton>Sign Up   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
