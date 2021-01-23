@@ -7,10 +7,11 @@ import {
     Route,
 } from "react-router-dom";
 
-import Test from '../Test/Test'
+import UnderConstruction from '../../Components/Contruction/Contruction'
 import FrontPage from '../FrontPage/FrontPage'
 
 import Authrouter from './NestedRouters/Auth'
+import UserRouter from './NestedRouters/User'
 
 const Router = () => {
     return (
@@ -26,8 +27,16 @@ const Router = () => {
                             <Authrouter />
                         </Route>
 
-                        <Route path="/test">
-                            <Test />
+                        <Route path="/user" exact={false}>
+                            <UserRouter />
+                        </Route>
+
+                        <Route path="/about">
+                            <UnderConstruction />
+                        </Route>
+
+                        <Route path="/Store">
+                            <UnderConstruction />
                         </Route>
 
                     </Switch>

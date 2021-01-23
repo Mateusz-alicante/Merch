@@ -30,7 +30,7 @@ const Login = (props) => {
         if (response && response.status === 200 && response.data.token) {
             props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
             setStatus(undefined)
-            history.push('/')
+            history.push('/user')
             toast.success('Login successful' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
               })
@@ -46,8 +46,8 @@ const Login = (props) => {
         <div>
             <SignUpButton linkTo={'/auth/signup'} text={"If you still dont have an account, create one now!"} />
             <form className={styles.LoginForm}>
-                <SimpleTextInput value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
-                <SimpleTextInput value={password} onChange={setpassword} placeholder={"password"} label={"Password:"}/>
+                <SimpleTextInput type={'email'} value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
+                <SimpleTextInput type={'password'} value={password} onChange={setpassword} placeholder={"password"} label={"Password:"}/>
                 <SimpleButton disabled={status == "loading"} submit={RequestLogiIn}>Log in   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
             </form>
         </div>

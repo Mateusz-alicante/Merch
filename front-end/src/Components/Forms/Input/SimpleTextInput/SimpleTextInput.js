@@ -5,7 +5,7 @@ const SimpleTextInput = (props) => {
     return (
         <div className={styles.outerContainer}>
             <label className={styles.label}>{props.label}</label>
-            <input className={styles.textInput} placeholder={props.placeholder} onChange={(e) => props.onChange(e.target.value)} value={props.value} />
+            <input type={props.type || "text"} className={styles.textInput} placeholder={props.placeholder} onChange={(e) => props.onChange(e.target.value)} value={props.value} />
         </div>
     )
 }

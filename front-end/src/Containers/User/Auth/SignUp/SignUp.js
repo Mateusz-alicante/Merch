@@ -46,7 +46,7 @@ const SignUp = (props) => {
         if (response && response.status === 200 && response.data.token) {
             props.dispatch(setAuthInfo({ token: response.headers['x-auth-token'], ...response.data }))
             setStatus(undefined)
-            history.push('/')
+            history.push('/user')
             toast.success('Login successful' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
               })
@@ -62,12 +62,12 @@ const SignUp = (props) => {
         <div>
             <SignUpButton linkTo={'/auth/login'} text={"If you already have an account, log in now!"} />
             <form className={styles.SignUpForm}>
-                <SimpleTextInput value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
+                <SimpleTextInput type={'email'} value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
                 <SimpleTextInput value={name} onChange={setName} placeholder={"name"} label={"Full name:"}/>
                 <SimpleSelect label={"Year:"} value={year} onChange={value => setYear(value)} options={SignUpSelectOptions.year} />
                 <SimpleSelect label={"Section:"} value={section} onChange={value => setSection(value)} options={SignUpSelectOptions.Sections} />
-                <SimpleTextInput value={password} onChange={setPassword} placeholder={"password"} label={"Password:"}/>
-                <SimpleTextInput value={repeatPassword} onChange={setRepeatPassword} placeholder={"confirm password"} label={"Confirm password:"}/>
+                <SimpleTextInput type={'password'} value={password} onChange={setPassword} placeholder={"password"} label={"Password:"}/>
+                <SimpleTextInput type={'password'} value={repeatPassword} onChange={setRepeatPassword} placeholder={"confirm password"} label={"Confirm password:"}/>
                 <SimpleButton disabled={status == "loading"} submit={RequestSignIn} >Sign Up   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
             </form>
         </div>

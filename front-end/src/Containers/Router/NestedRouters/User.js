@@ -3,19 +3,15 @@ import {
     Route,
 } from "react-router-dom";
 
-import Editor from '../../user/publishing/Editor/Editor'
-import Dashboard from '../../user/Dashboard/Dashboard'
+import UnderConstruction from '../../../Components/Contruction/Contruction'
 
 const App = () => {
     return (
         <>
-            <Route path='/user/writePost'>
-                <Editor />
+            <Route path='/user' exact={true}>
+                <UnderConstruction />
             </Route>
 
-            <Route path='/user' exact>
-                <Dashboard />
-            </Route>
         </>
     )
 }

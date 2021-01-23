@@ -19,9 +19,9 @@ const Nav = (props) => {
                 <h1>Site Name</h1>
                 <nav className={styles.navContainer}>
                     <span><NavLink className={styles.navLink} to={'/'}>Home</NavLink></span>
-                    <span>Store</span>
-                    <span>About</span>
-                    <span><NavLink className={styles.navLink} to={'/auth/login'}>{props.redux.auth.isLoggedIn ? "My account" : "Log in"}</NavLink></span>
+                    <span><NavLink className={styles.navLink} to={'/store'}>Store</NavLink></span>
+                    <span><NavLink className={styles.navLink} to={'/about'}>About</NavLink></span>
+                    <span><NavLink className={styles.navLink} to={props.redux.auth.isLoggedIn ? "/user" : '/auth/login'}>{props.redux.auth.isLoggedIn ? "My account" : "Log in"}</NavLink></span>
                 </nav>
                 <nav className={styles.mobileNavHeader} onClick={() => setOpen(!menuOpen)}>
                     <FontAwesomeIcon icon={menuOpen ? faTimes : faBars} />
@@ -30,9 +30,9 @@ const Nav = (props) => {
             <div className={styles.navMobileContainer} style={{height: menuOpen ? "10em" : "0"}}>
                 <nav className={styles.navMobileInnerContainer}>
                     <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
-                    <span><FontAwesomeIcon icon={faShoppingCart} /> Store</span>
-                    <span><FontAwesomeIcon icon={faInfoCircle} /> About</span>
-                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/auth/login'}><FontAwesomeIcon icon={faAddressCard} />My account</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/store'}><FontAwesomeIcon icon={faShoppingCart} /> Store</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/store'}><FontAwesomeIcon icon={faInfoCircle} /> About</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={props.redux.auth.isLoggedIn ? "/user" : '/auth/login'}><FontAwesomeIcon icon={faAddressCard} />{props.redux.auth.isLoggedIn ? "My account" : "Log in"}</NavLink></span>
                 </nav>
             </div>
         </div>
