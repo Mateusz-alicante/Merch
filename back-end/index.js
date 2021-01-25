@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 const AuthRouter = require('./utils/routers/Auth/Auth')
 app.use("/api/auth", AuthRouter)
 
+const ItemRouter = require('./utils/routers/Items/Items')
+app.use("/api/items", ItemRouter)
+
 
 app.get('/api/test', (req, res) => {
     console.log("Test request recieved")
