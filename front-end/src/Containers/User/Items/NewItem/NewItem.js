@@ -33,8 +33,8 @@ const NewItem = (props) => {
             thumbnail: thumb,
             description: desc,
             price: parseInt(Math.ceil(price * 100)),
-            sizes: sizes.split(','),
-            images: images.split(',')
+            sizes: sizes.split(', ').map(size => size.trim()),
+            images: images.split(', ').map(url => url.trim())
         }, {
             headers: {
                 authorization: props.redux.auth.token

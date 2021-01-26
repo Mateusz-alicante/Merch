@@ -13,7 +13,8 @@ router.post('/saveItem', AdminAuth, async (req, res) => {
     res.status(200)
     res.send(item._id)
   } catch (e) {
-    res.statusCode(400)
+    console.log(e)
+    res.status(400)
     res.send(e)
   }
 })

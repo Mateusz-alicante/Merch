@@ -27,6 +27,7 @@ const ItemSchema = new mongoose.Schema({
     images: [String],
     visible: {type: Boolean, default: true},
     inStock : {type: Boolean, default: true},
+    sizes: [String],
     views: {type: Number, default: 0},
     author: String,
     createdAt: {
