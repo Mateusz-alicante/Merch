@@ -30,9 +30,9 @@ const NewItem = (props) => {
         setStatus('loading')
         const response = await axios.post('/api/items/saveItem', {
             title,
-            thumb,
-            desc,
-            price,
+            thumbnail: thumb,
+            description: desc,
+            price: parseInt(Math.ceil(price * 100)),
             sizes: sizes.split(','),
             images: images.split(',')
         }, {
@@ -40,7 +40,7 @@ const NewItem = (props) => {
                 authorization: props.redux.auth.token
             }
         })
-        if (response && response.status === 200 && response.data.token) {
+        if (response && response.status === 200) {
             setStatus(undefined)
             history.push('/user')
             toast.success('Saved successfuly', {
@@ -61,7 +61,7 @@ const NewItem = (props) => {
                 <SimpleTextInput value={title} onChange={setTitle} placeholder={"title"} label={"Title:"} />
                 <TextArea value={desc} onChange={setDesc} placeholder={"description"} label={"Description:"} />
                 <SimpleTextInput value={thumb} onChange={setThumb} placeholder={"url of the image of the thumbnail"} label={"Thumbnail:"} />
-                <SimpleTextInput value={price} onChange={setPrice} placeholder={"The price of the item"} label={"Price:"} />
+                <SimpleTextInput value={price} onChange={setPrice} placeholder={"The price of the item, a number with 2 decimals."} label={"Price:"} />
                 <TextArea value={sizes} onChange={setSizes} placeholder={"Enter the sizes, separated by a comma ','"} label={"Sizes:"} />
                 <TextArea value={images} onChange={setImages} placeholder={"Enter the url's of the images, separated by a comma ','"} label={"Images:"} />
                 <SimpleButton disabled={status == "loading"} submit={RequestSave} >Save   <FontAwesomeIcon icon={faCloudUploadAlt} /></SimpleButton>

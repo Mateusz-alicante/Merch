@@ -6,23 +6,28 @@ const Item = require('../../db/Models/Item')
 
 
 router.post('/saveItem', AdminAuth, async (req, res) => {
-  data = req.body
-  console.log(data)
-  item = new Item({...data, author: req.user})
-  await item.save()
-  res.send(item._id)
+  try {
+    data = req.body
+    item = new Item({ ...data, author: req.user })
+    await item.save()
+    res.status(200)
+    res.send(item._id)
+  } catch (e) {
+    res.statusCode(400)
+    res.send(e)
+  }
 })
 
 router.get('/loadItems', async (req, res) => {
-  const items = await Item.find({visible: true, inStock: true})
+  const items = await Item.find({ visible: true, inStock: true })
     .select("-body -__v -views")
-    
-    res.send(posts)
+
+  res.send(items)
 })
 
 router.get('/fetchItem', async (req, res) => {
   id = req.query.id
-  const item = await Item.findOneAndUpdate({_id :id, visible: true}, {$inc : {'views' : 1}}).select(" -__v -views -visible -inStock -createdAt -images -title").exec();
+  const item = await Item.findOneAndUpdate({ _id: id, visible: true }, { $inc: { 'views': 1 } }).select(" -__v -views -visible -inStock -createdAt -images -title").exec();
   // const post = await Post.find({_id: id}).select(" -__v -views")
   res.send(item)
 
@@ -50,5 +55,5 @@ router.get('/fetchItem', async (req, res) => {
 // })
 
 
-  
+
 module.exports = router

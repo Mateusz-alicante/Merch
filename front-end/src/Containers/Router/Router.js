@@ -9,6 +9,7 @@ import {
 
 import UnderConstruction from '../../Components/Contruction/Contruction'
 import FrontPage from '../FrontPage/FrontPage'
+import StorePage from '../StorePage/StorePage'
 
 import Authrouter from './NestedRouters/Auth'
 import UserRouter from './NestedRouters/User'
@@ -36,7 +37,7 @@ const Router = () => {
                         </Route>
 
                         <Route path="/Store">
-                            <UnderConstruction />
+                            <StorePage />
                         </Route>
 
                     </Switch>

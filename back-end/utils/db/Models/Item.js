@@ -28,6 +28,7 @@ const ItemSchema = new mongoose.Schema({
     visible: {type: Boolean, default: true},
     inStock : {type: Boolean, default: true},
     views: {type: Number, default: 0},
+    author: String,
     createdAt: {
         type: Date,
         default: Date.now()
