@@ -1,0 +1,9 @@
+.imageContainer {
+    overflow: hidden;
+}
+
+.galery {
+    height: 30%;
+    background-color: black;
+    overflow: hidden;
+}

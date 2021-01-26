@@ -12,6 +12,12 @@
     position: relative;
 }
 
+.SignUpButton::after {
+    content: ">";
+    font-weight: 400;
+    position: absolute;
+}  
+
 .SignUpButton a {
     text-decoration: none;
     color: white;
@@ -20,9 +26,6 @@
 
 @media (min-width:600px) {
     .SignUpButton::after {
-        content: ">";
-        font-weight: 400;
-        position: absolute;
         left: 93%;
         top: 31%;
         right: 5%;
@@ -58,9 +61,6 @@
         font-size: .6em;
     }
     .SignUpButton::after {
-        content: ">";
-        height: 30px;
-        font-weight: 400;
         position: absolute;
         right: 5%;
         top: 50%;

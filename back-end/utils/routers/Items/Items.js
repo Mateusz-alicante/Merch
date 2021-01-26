@@ -27,7 +27,7 @@ router.get('/loadItems', async (req, res) => {
 
 router.get('/fetchItem', async (req, res) => {
   id = req.query.id
-  const item = await Item.findOneAndUpdate({ _id: id, visible: true }, { $inc: { 'views': 1 } }).select(" -__v -views -visible -inStock -createdAt -images -title").exec();
+  const item = await Item.findOneAndUpdate({ _id: id, visible: true }, { $inc: { 'views': 1 } }).select(" -__v -views -visible -inStock -createdAt").exec();
   // const post = await Post.find({_id: id}).select(" -__v -views")
   res.send(item)
 

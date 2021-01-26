@@ -10,6 +10,7 @@ import {
 import UnderConstruction from '../../Components/Contruction/Contruction'
 import FrontPage from '../FrontPage/FrontPage'
 import StorePage from '../StorePage/StorePage'
+import SingleItem from '../SingleItem/SingleItem'
 
 import Authrouter from './NestedRouters/Auth'
 import UserRouter from './NestedRouters/User'
@@ -38,6 +39,10 @@ const Router = () => {
 
                         <Route path="/Store">
                             <StorePage />
+                        </Route>
+
+                        <Route path="/items/:id">
+                            <SingleItem />
                         </Route>
 
                     </Switch>
