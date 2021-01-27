@@ -1,0 +1,22 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.textContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2em;
+}
+
+@media (max-width:600px) {
+    .buttonGrid {
+        grid-template-columns: 1fr;
+    }
+}

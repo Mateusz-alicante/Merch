@@ -1,7 +1,8 @@
 .innerContainer {
-    background-color: aquamarine;
+    background-color: lightgray;
     height: 15em;
     cursor: pointer;
+    border-radius: 1em;
 }
 
 .icon {

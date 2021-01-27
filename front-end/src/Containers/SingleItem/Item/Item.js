@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import styles from './Item.module.css'
 
 import ImageGallery from 'react-image-gallery';
@@ -10,15 +11,27 @@ import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 
-const Item = ({ data }) => {
+import { AddItem } from '../../../Utils/Redux/Actions/Cart'
+import { connect } from 'react-redux'
+
+const Item = ({ data, redux, dispatch }) => {
 
     const [size, setSize] = useState('')
     const [status, setStatus] = useState(undefined)
+    const history = useHistory()
 
-    useEffect(() => console.log(data), [])
 
     const AddToCart = () => {
-        toast.error("This option is yet under construction")
+        if (size == "") {
+            toast.error("Please choose a size")
+        } else if (!redux.auth.isLoggedIn) {
+            toast.error("Please log in before adding items to cart")
+            history.push('/auth/login')
+        } else {
+            dispatch(AddItem({ item: data._id, size: size.value }))
+            toast.success("Item added to cart")
+            history.push('/user/cart')
+        }
     }
 
     return (
@@ -42,7 +55,7 @@ const Item = ({ data }) => {
                     </div>
                 </div>
                 <div className={styles.formContainer}>
-                    <h1>Order Now:</h1>
+                    <h1 className={styles.orderButton}>Order Now:</h1>
                     <div>
                         <SelectInput options={data.sizes.map(size => ({ value: size, label: size }))} onChange={setSize} value={size} label={"Select a size"} />
                         <Button submit={AddToCart} disabled={status == "loading"}>Add to cart   <FontAwesomeIcon icon={faShoppingBasket} /></Button>
@@ -53,4 +66,10 @@ const Item = ({ data }) => {
     )
 }
 
-export default Item
+const mapStateToProps = (state) => {
+    return {
+        redux: state
+    }
+}
+
+export default connect(mapStateToProps)(Item)

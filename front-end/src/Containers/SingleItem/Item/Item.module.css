@@ -22,6 +22,10 @@
     width: 60%;
 }
 
+.orderButton {
+    margin-top: 3em;
+}
+
 
 @media (max-width:900px) {
     .outerContainer {
