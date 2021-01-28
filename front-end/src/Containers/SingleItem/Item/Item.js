@@ -28,7 +28,7 @@ const Item = ({ data, redux, dispatch }) => {
             toast.error("Please log in before adding items to cart")
             history.push('/auth/login')
         } else {
-            dispatch(AddItem({ item: data._id, size: size.value }))
+            dispatch(AddItem({ item: data._id, size: size.value, price: data.price }))
             toast.success("Item added to cart")
             history.push('/user/cart')
         }

@@ -46,6 +46,7 @@ const SingleItem = (props) => {
                 <button onClick={() => quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)}>-</button>
             </div>
             <div className={styles.textContainer}><h3>{`${parseFloat(data.price / 100)} €`}</h3></div>
+            <div className={styles.textContainer}><h3>{props.item.size}</h3></div>
             <div className={styles.textContainer}><button onClick={RemoveItemFromCart}>Remove</button></div>
         </div>
     )

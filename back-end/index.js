@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 const AuthRouter = require('./utils/routers/Auth/Auth')
 app.use("/api/auth", AuthRouter)
 
+const OrderRouter = require('./utils/routers/Orders/Orders')
+app.use("/api/orders", OrderRouter)
+
 const ItemRouter = require('./utils/routers/Items/Items')
 app.use("/api/items", ItemRouter)
 

@@ -1,7 +1,8 @@
-export const AddItem = ({ item, size }) => ({
+export const AddItem = ({ item, size, price }) => ({
     type: "ADD_ITEM",
     item,
-    size
+    size,
+    price
 })
 
 export const RemoveItem = ({ item }) => ({
