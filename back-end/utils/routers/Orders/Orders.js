@@ -2,6 +2,7 @@ var express = require('express')
 var router = express.Router()
 const { nonAdminAuth, AdminAuth } = require('../../Middleware/Auth')
 const Order = require('../../db/Models/Order')
+const Item = require('../../db/Models/Item')
 
 
 
@@ -9,7 +10,9 @@ router.post('/new', nonAdminAuth, async (req, res) => {
     console.log("Recieved new order request")
   try {
     data = req.body
-    order = new Order({ order: data.order, author: req.user.data })
+    items = await Item.find({
+      '_id': { $in: data.order.map(order => order.item)}}).exec()
+    order = new Order({ order: data.order, author: req.user.data, amount: items.reduce((acc, item) => acc + item.price * data.order.find(order => order.item == item._id).quantity, 0)})
     await order.save()
     res.status(200)
     res.send(order._id)
@@ -20,12 +23,12 @@ router.post('/new', nonAdminAuth, async (req, res) => {
   }
 })
 
-// router.get('/loadItems', async (req, res) => {
-//   const items = await Item.find({ visible: true, inStock: true })
-//     .select("-body -__v -views")
+router.get('/loadMyOrders', nonAdminAuth, async (req, res) => {
+  const orders = await Order.find({ author: req.user.data })
+    .select(" -__v -author")
 
-//   res.send(items)
-// })
+  res.send(orders)
+})
 
 // router.get('/fetchItem', async (req, res) => {
 //   id = req.query.id

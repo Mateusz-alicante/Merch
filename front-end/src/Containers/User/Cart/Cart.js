@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import styles from './Cart.module.css'
+import { useHistory } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { ClearCart } from '../../../Utils/Redux/Actions/Cart'
@@ -16,6 +17,7 @@ const Cart = (props) => {
 
     const [total, setTotal] = useState(0)
     const [status, setStatus] = useState(undefined)
+    const history = useHistory()
 
     const Order = async () => {
         setStatus('loading')
@@ -27,12 +29,12 @@ const Cart = (props) => {
             }})
         console.log(response)
         if (response && response.status === 200) {
-            setStatus(undefined)
-            // history.push('/user')
+            setStatus(undefined) 
             toast.success('Order successful' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
             })
             props.dispatch(ClearCart())
+            history.push('/user/orders')
         } else {
             setStatus(undefined)
             toast.error('Order unsuccessful, check the inputs and try again' ,{

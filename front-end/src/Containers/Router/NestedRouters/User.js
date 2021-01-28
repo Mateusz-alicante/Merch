@@ -7,6 +7,7 @@ import UnderConstruction from '../../../Components/Contruction/Contruction'
 import Dashboard from '../../User/Dashboard/Dashboard'
 import NewItem from '../../User/Items/NewItem/NewItem'
 import Cart from '../../User/Cart/Cart'
+import MyOrders from '../../User/MyOrders/Orders'
 
 const App = () => {
     return (
@@ -21,6 +22,10 @@ const App = () => {
 
             <Route path='/user/new-item' exact={true}>
                 <NewItem />
+            </Route>
+
+            <Route path='/user/orders' exact={true}>
+                <MyOrders />
             </Route>
 
         </>

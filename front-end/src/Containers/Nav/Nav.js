@@ -10,7 +10,6 @@ const Nav = (props) => {
 
     const [menuOpen, setOpen] = useState(false)
 
-    useEffect(() => console.log(menuOpen))
 
 
     return (
@@ -31,7 +30,7 @@ const Nav = (props) => {
                 <nav className={styles.navMobileInnerContainer}>
                     <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/'}><FontAwesomeIcon icon={faHome} />Home</NavLink></span>
                     <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/store'}><FontAwesomeIcon icon={faShoppingCart} /> Store</NavLink></span>
-                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/store'}><FontAwesomeIcon icon={faInfoCircle} /> About</NavLink></span>
+                    <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={'/about'}><FontAwesomeIcon icon={faInfoCircle} /> About</NavLink></span>
                     <span><NavLink onClick={() => setOpen(false)} className={styles.navLink} to={props.redux.auth.isLoggedIn ? "/user" : '/auth/login'}><FontAwesomeIcon icon={faAddressCard} />{props.redux.auth.isLoggedIn ? "My account" : "Log in"}</NavLink></span>
                 </nav>
             </div>
