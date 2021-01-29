@@ -10,7 +10,7 @@ const SimpleButton = (props) => {
     }
 
     return (
-        <button disabled={props.disabled} onClick={submitForm} className={styles.button}>
+        <button style={{width: props.width || "100%"}} disabled={props.disabled} onClick={submitForm} className={styles.button}>
             {props.children}
         </button>
     )

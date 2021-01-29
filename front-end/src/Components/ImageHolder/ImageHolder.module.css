@@ -20,20 +20,23 @@
     border-radius: 3em;
 }
 
+@media (max-width:1500px) {
+    .centered {
+        font-size: 2em;
+      }
+}
+
 
 @media (max-width:1000px) {
     .centered {
-        font-size: 2.5em;
+        font-size: 1.5em;
       }
 }
 
 
 @media (max-width:480px) {
     .imageContainer img {
-        border-radius: 1.5em;
+        border-radius: 1em;
     }
-
-    .centered {
-        font-size: 1.5em;
-      }
 }
+

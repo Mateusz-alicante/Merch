@@ -30,4 +30,7 @@
     .buttonGrid {
         grid-template-columns: 1fr;
     }
+    .textContainer {
+        font-size: .6em;
+    }
 }

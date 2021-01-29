@@ -25,9 +25,10 @@ const Orders = (props) => {
                 }
             })
             if (response && response.status === 200) {
-                setOrders(response.data)
+                setOrders(response.data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1))
                 setStatus(undefined)
                 // history.push('/user')
+                console.log(orders)
             } else {
                 setStatus(undefined)
                 toast.error('Cannot fetch your orders')

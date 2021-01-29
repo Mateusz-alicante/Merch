@@ -1,19 +1,21 @@
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    font-size: 1em;
 }
 
+.image {
+    height: 10em;
+}
 
 .textContainer {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: .7em;
 }
 
-
 @media (max-width:600px) {
-    .textContainer {
-        font-size: .6em;
+    .image {
+        height: 7em;
     }
 }

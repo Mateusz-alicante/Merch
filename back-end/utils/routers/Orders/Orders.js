@@ -3,6 +3,7 @@ var router = express.Router()
 const { nonAdminAuth, AdminAuth } = require('../../Middleware/Auth')
 const Order = require('../../db/Models/Order')
 const Item = require('../../db/Models/Item')
+const User = require('../../db/Models/User')
 
 
 
@@ -22,11 +23,37 @@ router.post('/new', nonAdminAuth, async (req, res) => {
   }
 })
 
+router.get('/cancel', nonAdminAuth, async (req, res) => {
+  user_id = req.user.data
+  id = req.query.id
+
+  const user = await User.findById(user_id)
+  const order = await Order.findById(id)
+
+  if (order.author !== user_id && !user.isAdmin) {
+    res.status(400)
+    res.send("Not Authorized")
+  }
+  order.status = "Cancelled"
+  await order.save()
+
+  res.status(200)
+  res.send("Cancelled Order")
+})
+
 router.get('/loadMyOrders', nonAdminAuth, async (req, res) => {
   const orders = await Order.find({ author: req.user.data })
     .select(" -__v -author")
 
   res.send(orders)
+})
+
+router.get('/fulfill', AdminAuth, async (req, res) => {
+  id = req.query.id
+  await Order.findByIdAndUpdate(id, {status: "Fulfilled"})
+
+  res.status(200)
+  res.send("Order has been fulfilled")
 })
 
 router.get('/fetchOrder', nonAdminAuth, async (req, res) => {

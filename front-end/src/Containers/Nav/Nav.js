@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styles from './Nav.module.css'
 
@@ -15,7 +15,7 @@ const Nav = (props) => {
     return (
         <div className={styles.outerContainer}>
             <div className={styles.navHeader}>
-                <h1>Site Name</h1>
+                <Link><h1 className={styles.navSiteTitle}>Site Name</h1></Link>
                 <nav className={styles.navContainer}>
                     <span><NavLink className={styles.navLink} to={'/'}>Home</NavLink></span>
                     <span><NavLink className={styles.navLink} to={'/store'}>Store</NavLink></span>
