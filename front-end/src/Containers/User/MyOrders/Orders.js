@@ -41,13 +41,13 @@ const Orders = (props) => {
     )
     return (
         <div>
-            <h1>My Cart:</h1>
+            <h1>My Orders:</h1>
             <div className={styles.grid}>
                 <div className={styles.textContainer}><h3>Amount</h3></div>
                 <div className={styles.textContainer}><h3>Number of items</h3></div>
                 <div className={styles.textContainer}><h3>Date Ordered</h3></div>
                 <div className={styles.textContainer}><h3>Status</h3></div>
-                <div className={styles.textContainer}><h3>Cancel</h3></div>
+                <div className={styles.textContainer}><h3>Details</h3></div>
             </div>
             {( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>You have no orders yet</h1> : OrdersContent()}
 

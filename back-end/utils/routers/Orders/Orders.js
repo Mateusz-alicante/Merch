@@ -7,7 +7,6 @@ const Item = require('../../db/Models/Item')
 
 
 router.post('/new', nonAdminAuth, async (req, res) => {
-    console.log("Recieved new order request")
   try {
     data = req.body
     items = await Item.find({
@@ -30,13 +29,18 @@ router.get('/loadMyOrders', nonAdminAuth, async (req, res) => {
   res.send(orders)
 })
 
-// router.get('/fetchItem', async (req, res) => {
-//   id = req.query.id
-//   const item = await Item.findOneAndUpdate({ _id: id, visible: true }, { $inc: { 'views': 1 } }).select(" -__v -views -visible -inStock -createdAt").exec();
-//   // const post = await Post.find({_id: id}).select(" -__v -views")
-//   res.send(item)
-
-// })
+router.get('/fetchOrder', nonAdminAuth, async (req, res) => {
+  user_id = req.user.data
+  id = req.query.id
+  const order = await Order.findById(id).exec();
+  if ( order.author == req.user.data ) {
+    res.status(200)
+    res.send(order)
+  } else {
+    res.status(400)
+    res.send("Not authorized to fetch this order")
+  }
+})
 
 
 
