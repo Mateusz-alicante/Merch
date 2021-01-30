@@ -29,6 +29,10 @@ const App = () => {
                 <MyOrders />
             </Route>
 
+            <Route path='/user/all-orders' exact={true}>
+                <MyOrders all={true} />
+            </Route>
+
             <Route path='/user/order/:id' exact={true}>
                 <SingleOrder />
             </Route>

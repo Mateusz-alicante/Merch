@@ -67,12 +67,21 @@ const SingleOrder = (props) => {
     const LoadedContent = () => {
         return (
             <div>
-                <h2>Order Details:</h2>
-                <div className={styles.textInfoContainer}><h3>Date Created:</h3> <h3>{moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h3></div>
-                <div className={styles.textInfoContainer}><h3>Status:</h3> <h3>{data.status}</h3></div>
-                <div className={styles.textInfoContainer}><h3>Amount:</h3> <h3>{`${parseFloat(data.amount / 100)} €`}</h3></div>
-                <div>
-                    <h3>Items:</h3>
+                <div className={styles.sectionContainer}>
+                    <h2>Order Details:</h2>
+                    <div className={styles.textInfoContainer}><h3>Date Created:</h3> <h3>{moment(data.createdAt).format('MMMM Do YYYY, h:mm:ss a')}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Status:</h3> <h3>{data.status}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Amount:</h3> <h3>{`${parseFloat(data.amount / 100)} €`}</h3></div>
+                </div>
+                <div className={styles.sectionContainer}>
+                    <h2>Customer Details:</h2>
+                    <div className={styles.textInfoContainer}><h3>Name:</h3> <h3>{data.authorData.name}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>E-mail:</h3> <h3>{data.authorData.email}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Section:</h3> <h3>{data.authorData.section}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Year:</h3> <h3>{data.authorData.year}</h3></div>
+                </div>
+                <div className={styles.sectionContainer}>
+                    <h2>Items:</h2>
                     <div className={styles.grid}>
                         <div className={styles.textContainer}><h3>Image</h3></div>
                         <div className={styles.textContainer}><h3>Title</h3></div>

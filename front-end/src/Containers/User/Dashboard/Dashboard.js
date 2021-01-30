@@ -4,13 +4,14 @@ import styles from './Dashboard.module.css'
 import SingleItem from './SingleItem/SingleItem'
 import { connect } from 'react-redux'
 
-import { faPlus, faShoppingCart, faReceipt } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faShoppingCart, faReceipt, faTasks } from "@fortawesome/free-solid-svg-icons";
 
 const Dashboard = (props) => {
     return (
         <div>
             <div className={styles.grid}>
                 { props.redux.auth.isAdmin && <SingleItem key={"NewItem"} to={'/user/new-item'} text={"New Item"} icon={faPlus} />}
+                { props.redux.auth.isAdmin && <SingleItem key={"All Orders"} to={'/user/all-orders'} text={"All Orders"} icon={faTasks} />}
                 <SingleItem key={"My Cart"} to={'/user/cart'} text={"My Cart"} icon={faShoppingCart} />
                 <SingleItem key={"My Orders"} to={'/user/orders'} text={"My Orders"} icon={faReceipt} />
             </div>

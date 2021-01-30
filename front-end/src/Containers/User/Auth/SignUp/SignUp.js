@@ -40,7 +40,7 @@ const SignUp = (props) => {
             email,
             name,
             password,
-            year: parseInt(year.value),
+            year: year.value,
             section: section.value
         })
         if (response && response.status === 200 && response.data.token) {

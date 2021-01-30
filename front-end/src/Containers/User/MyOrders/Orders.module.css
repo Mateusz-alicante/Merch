@@ -3,6 +3,13 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.ExtendedGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    font-size: 1em;
+}
+
+
 .textContainer {
     display: flex;
     align-items: center;
@@ -25,6 +32,7 @@
     flex-direction: row;
     justify-content: space-around;
 }
+
 
 @media (max-width:600px) {
     .buttonGrid {

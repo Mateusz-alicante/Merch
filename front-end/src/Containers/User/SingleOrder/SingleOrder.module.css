@@ -17,3 +17,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.sectionContainer {
+    margin-top: 3em;
+    border: 1px solid #ccc;
+    border-radius: 1em;
+    padding: 2em;
+}

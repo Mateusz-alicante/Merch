@@ -10,7 +10,7 @@ const Actions = (props) => {
     useEffect(() => {
         console.log(props.admin)
     }, [])
-
+ 
 
     return (
         <div className={styles.grid}>

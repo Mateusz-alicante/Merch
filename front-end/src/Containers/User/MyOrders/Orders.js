@@ -4,53 +4,55 @@ import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 import styles from './Orders.module.css'
 import SingleOrder from './SingleItem/SingleOrder'
+ 
 
-// import SingleItem from './SingleItem/SingleItem'
-import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faCashRegister } from "@fortawesome/free-solid-svg-icons";
+import Filters from './Filter/Filter'
 
 const Orders = (props) => {
 
     const [status, setStatus] = useState(undefined)
     const [orders, setOrders] = useState(undefined)
 
-    useEffect(
-        async () => {
-            setStatus('loading')
-            const response = await axios.get('/api/orders/loadMyOrders', {
-                headers: {
-                    authorization: props.redux.auth.token
-                }
-            })
-            if (response && response.status === 200) {
-                setOrders(response.data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1))
-                setStatus(undefined)
-                // history.push('/user')
-                console.log(orders)
-            } else {
-                setStatus(undefined)
-                toast.error('Cannot fetch your orders')
+    const fetchOrders = async (options = {}) => {
+        const requestURL = props.all ? "/api/orders/loadAllOrders" : "/api/orders/loadMyOrders"
+        setStatus('loading')
+        const response = await axios.post(requestURL, options, {
+            headers: {
+                authorization: props.redux.auth.token
             }
-        }, [])
+        })
+        if (response && response.status === 200) {
+            setOrders(response.data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1))
+            setStatus(undefined)
+            // history.push('/user')
+            console.log(orders)
+        } else {
+            setStatus(undefined)
+            toast.error('Cannot fetch your orders')
+        }
+    }
+
+    useEffect(fetchOrders, [])
 
     const OrdersContent = () => (
         <div>
-            <div>{orders.map((order) => <SingleOrder order={order} />)}</div>
+            <div>{orders.map((order) => <SingleOrder order={order} extended={props.all}/>)}</div>
         </div>
     )
     return (
         <div>
             <h1>My Orders:</h1>
-            <div className={styles.grid}>
+            {props.all && <Filters submit={fetchOrders} />}
+            <div className={props.all ? styles.ExtendedGrid : styles.grid}>
                 <div className={styles.textContainer}><h3>Amount</h3></div>
-                <div className={styles.textContainer}><h3>Number of items</h3></div>
+                {!props.all && <div className={styles.textContainer}><h3>Number of items</h3></div>}
                 <div className={styles.textContainer}><h3>Date Ordered</h3></div>
                 <div className={styles.textContainer}><h3>Status</h3></div>
+                {props.all && <div className={styles.textContainer}><h3>Name</h3></div>}
+                {props.all && <div className={styles.textContainer}><h3>Year</h3></div>}
                 <div className={styles.textContainer}><h3>Details</h3></div>
             </div>
-            {( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>You have no orders yet</h1> : OrdersContent()}
+            {( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>{ props.all ? "No order created yet" : "You have no orders yet"}</h1> : OrdersContent()}
 
         </div>
     )
