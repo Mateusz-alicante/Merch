@@ -1,16 +1,11 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import styles from './Actions.module.css'
-import { connect } from 'react-redux'
 import Button from '../../../../Components/Forms/Button/SimpleButton/SimpleButton'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Actions = (props) => {
-    useEffect(() => {
-        console.log(props.admin)
-    }, [])
- 
 
     return (
         <div className={styles.grid}>

@@ -4,9 +4,13 @@ import { connect } from 'react-redux'
 import { toast } from 'react-toastify'
 import styles from './Orders.module.css'
 import SingleOrder from './SingleItem/SingleOrder'
- 
+import Loader from '../../../Components/Loaders/Circle/Circle'
 
 import Filters from './Filter/Filter'
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 const Orders = (props) => {
 
@@ -39,6 +43,8 @@ const Orders = (props) => {
             <div>{orders.map((order) => <SingleOrder order={order} extended={props.all}/>)}</div>
         </div>
     )
+
+
     return (
         <div>
             <h1>My Orders:</h1>
@@ -52,7 +58,7 @@ const Orders = (props) => {
                 {props.all && <div className={styles.textContainer}><h3>Year</h3></div>}
                 <div className={styles.textContainer}><h3>Details</h3></div>
             </div>
-            {( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>{ props.all ? "No order created yet" : "You have no orders yet"}</h1> : OrdersContent()}
+            {status == "loading" ? <Loader /> : (( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>{ props.all ? "No order created yet" : "You have no orders yet"}</h1> : OrdersContent())}
 
         </div>
     )

@@ -6,9 +6,10 @@ import SimpleTextInput from '../../../../Components/Forms/Input/SimpleTextInput/
 import SimpleSelect from '../../../../Components/Forms/Input/SelectInput/SelectInput'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faChevronRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 import FilterOptions from './FilterOptions'
+
 
 const Filters = (props) => {
 
@@ -16,6 +17,7 @@ const Filters = (props) => {
     const [name, setName] = useState("")
     const [year, setYear] = useState(FilterOptions.year[0])
     const [section, setSection] = useState(FilterOptions.section[0])
+    const [open, setOpen] = useState(false)
 
     const submit = () => {
         const options = {}
@@ -30,8 +32,8 @@ const Filters = (props) => {
 
     return (
         <div className={styles.Container}>
-            <h2>Filter Orders:</h2>
-            <div>
+            <h2 onClick={() => setOpen(!open)}><FontAwesomeIcon icon={open ? faChevronDown : faChevronRight} /> Filter Orders:</h2>
+            <div className={styles.innerContainer} style={{maxHeight: open ? "50em" : "0", marginBottom: open ? "5em" : "0"}}>
                 <SimpleTextInput type={'Name'} value={email} onChange={setEmail} placeholder={"Search by email"} label={"E-mail:"}/>
                 <SimpleTextInput value={name} onChange={setName} placeholder={"Search by name"} label={"Full name:"}/>
                 <SimpleSelect label={"Year:"} value={year} onChange={value => setYear(value)} options={FilterOptions.year} />

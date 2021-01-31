@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import axios from 'axios'
 import styles from './SingleItem.module.css'
 import Item from './Item/Item'
+import Loader from '../../Components/Loaders/Circle/Circle'
 
 const SinglePost = () => {
 
@@ -24,7 +25,7 @@ const SinglePost = () => {
     
         return (
             <div>
-                {status == 'OK' ? <Item data={data} /> : <h1>Loading...</h1>}
+                {status == 'OK' ? <Item data={data} /> : <Loader />}
             </div>
         )
 }
