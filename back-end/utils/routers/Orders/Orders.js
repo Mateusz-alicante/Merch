@@ -59,29 +59,54 @@ router.post('/loadAllOrders', AdminAuth, async (req, res) => {
   if (req.body == {}) {
     return res.send(orders)
   } else {
-    const userIds = orders.map(order => order.author)
-    const users = await User.find({ '_id': { $in: userIds } });
-    const OrderWithAuthor = orders.map(order => ({ order, author: users.find(user => user._id == order.author) }))
+    // const userIds = orders.map(order => order.author)
+    // const users = await User.find({ '_id': { $in: userIds } });
+    // const OrderWithAuthor = orders.map(order => ({ order, author: users.find(user => user._id == order.author) }))
+
+
+    // if (req.body.name) {
+    //   const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.name.toLowerCase().includes(req.body.name.toLowerCase()))
+    //   orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+    // }
+
+    // if (req.body.email) {
+    //   const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.email.toLowerCase().includes(req.body.email.toLowerCase()))
+    //   orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+    // }
+
+    // if (req.body.year) {
+    //   const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.year.toString().toLowerCase().includes(req.body.year.toLowerCase()))
+    //   orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+    // }
+
+    // if (req.body.section) {
+    //   const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.section.toLowerCase().includes(req.body.section.toLowerCase()))
+    //   orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+    // }
+
+
+    // res.status(200)
+    // return res.send(orders)
 
 
     if (req.body.name) {
-      const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.name.toLowerCase().includes(req.body.name.toLowerCase()))
-      orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+      const matching = order.filter(OWA => OWA.author.name.toLowerCase().includes(req.body.name.toLowerCase()))
+      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
     }
 
     if (req.body.email) {
-      const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.email.toLowerCase().includes(req.body.email.toLowerCase()))
-      orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+      const matching = OrderWithAuthor.filter(OWA => OWA.author.email.toLowerCase().includes(req.body.email.toLowerCase()))
+      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
     }
 
     if (req.body.year) {
-      const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.year.toString().toLowerCase().includes(req.body.year.toLowerCase()))
-      orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+      const matching = OrderWithAuthor.filter(OWA => OWA.author.year.toString().toLowerCase().includes(req.body.year.toLowerCase()))
+      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
     }
 
     if (req.body.section) {
-      const withMatchingName = OrderWithAuthor.filter(OWA => OWA.author.section.toLowerCase().includes(req.body.section.toLowerCase()))
-      orders = orders.filter(order => withMatchingName.map(OWA => OWA.order._id).includes(order._id))
+      const matching = OrderWithAuthor.filter(OWA => OWA.author.section.toLowerCase().includes(req.body.section.toLowerCase()))
+      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
     }
 
 

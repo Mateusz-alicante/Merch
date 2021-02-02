@@ -23,6 +23,9 @@ app.use("/api/orders", OrderRouter)
 const ItemRouter = require('./utils/routers/Items/Items')
 app.use("/api/items", ItemRouter)
 
+const StatsRouter = require('./utils/routers/Stats/Stats')
+app.use("/api/stats", StatsRouter)
+
 
 app.get('/api/test', (req, res) => {
     console.log("Test request recieved")

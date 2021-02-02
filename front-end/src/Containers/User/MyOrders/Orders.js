@@ -8,10 +8,6 @@ import Loader from '../../../Components/Loaders/Circle/Circle'
 
 import Filters from './Filter/Filter'
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
 const Orders = (props) => {
 
     const [status, setStatus] = useState(undefined)
@@ -28,8 +24,6 @@ const Orders = (props) => {
         if (response && response.status === 200) {
             setOrders(response.data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1))
             setStatus(undefined)
-            // history.push('/user')
-            console.log(orders)
         } else {
             setStatus(undefined)
             toast.error('Cannot fetch your orders')
@@ -47,7 +41,7 @@ const Orders = (props) => {
 
     return (
         <div>
-            <h1>My Orders:</h1>
+            <h1>{props.all ? "All" : "My"} Orders:</h1>
             {props.all && <Filters submit={fetchOrders} />}
             <div className={props.all ? styles.ExtendedGrid : styles.grid}>
                 <div className={styles.textContainer}><h3>Amount</h3></div>

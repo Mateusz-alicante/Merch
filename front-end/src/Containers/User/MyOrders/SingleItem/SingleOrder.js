@@ -1,16 +1,14 @@
 import styles from './SingleOrder.module.css'
 import moment from 'moment'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 const SingleOrder = (props) => {
 
-    useEffect(() => console.log(props), [])
-
     let statusColor = "black"
 
     switch(props.order.status) {
-        case "In Progress":
+        case "InProgress":
             statusColor = "orange"
             break;
         case "Cancelled":

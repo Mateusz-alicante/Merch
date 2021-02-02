@@ -9,6 +9,7 @@ import NewItem from '../../User/Items/NewItem/NewItem'
 import Cart from '../../User/Cart/Cart'
 import MyOrders from '../../User/MyOrders/Orders'
 import SingleOrder from '../../User/SingleOrder/SingleOrder'
+import Stats from '../../User/Stats/Stats'
 
 const App = () => {
     return (
@@ -29,6 +30,10 @@ const App = () => {
                 <MyOrders />
             </Route>
 
+            <Route path='/user/stats' exact={true}>
+                <Stats />
+            </Route>
+
             <Route path='/user/all-orders' exact={true}>
                 <MyOrders all={true} />
             </Route>
@@ -36,6 +41,7 @@ const App = () => {
             <Route path='/user/order/:id' exact={true}>
                 <SingleOrder />
             </Route>
+
 
         </>
     )

@@ -91,7 +91,7 @@ const SingleOrder = (props) => {
                     </div>
                     {data.order.map(order => <SingleItem order={order} />)}
                 </div>
-                {data.status == "In Progress" && <Actions fulfill={FulfillOrder} cancel={CancelOrder} status={actionStatus} admin={props.redux.auth.isAdmin} />}
+                {data.status == "InProgress" && <Actions fulfill={FulfillOrder} cancel={CancelOrder} status={actionStatus} admin={props.redux.auth.isAdmin} />}
             </div>
         )
     }

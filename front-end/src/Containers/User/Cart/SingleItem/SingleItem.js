@@ -34,6 +34,7 @@ const SingleItem = (props) => {
         props.dispatch(RemoveItem({item: props.item.item}))
     }
 
+
     const content = () => (
         <div className={styles.grid}>
             <div className={styles.textContainer}>
@@ -42,8 +43,8 @@ const SingleItem = (props) => {
             <div className={styles.textContainer}><h3>{data.title}</h3></div>
             <div className={styles.textContainer}>
                 <h3>{quantity}</h3>
-                <button onClick={() => setQuantity(quantity + 1)}>+</button>
-                <button onClick={() => quantity > 1 ? setQuantity(quantity - 1) : setQuantity(1)}>-</button>
+                <button onClick={() => quantity < 3 ? setQuantity(quantity + 1) : toast.error('cannot add to cart more than 4 items in one orders')}>+</button>
+                <button onClick={() => quantity > 1 && setQuantity(quantity - 1)}>-</button>
             </div>
             <div className={styles.textContainer}><h3>{`${parseFloat(data.price / 100)} €`}</h3></div>
             <div className={styles.textContainer}><h3>{props.item.size}</h3></div>

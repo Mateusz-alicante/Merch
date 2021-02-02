@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const SingleItem = (props) => {
     return (
-        <Link to={props.to} style={{ textDecoration: 'none', color: 'black', width: '100%' }}>
+        <Link to={!props.function && props.to} onClick={props.function ? props.function : () => {}} style={{ textDecoration: 'none', color: 'black', width: '100%' }}>
             <div className={styles.innerContainer}>
                 <FontAwesomeIcon className={styles.icon} icon={props.icon} />
                 <h2>{props.text}</h2>

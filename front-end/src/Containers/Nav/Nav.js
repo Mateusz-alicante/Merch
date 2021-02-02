@@ -15,7 +15,7 @@ const Nav = (props) => {
     return (
         <div className={styles.outerContainer}>
             <div className={styles.navHeader}>
-                <Link><h1 className={styles.navSiteTitle}>Site Name</h1></Link>
+                <Link to={'/'}><h1 className={styles.navSiteTitle}>Site Name</h1></Link>
                 <nav className={styles.navContainer}>
                     <span><NavLink className={styles.navLink} to={'/'}>Home</NavLink></span>
                     <span><NavLink className={styles.navLink} to={'/store'}>Store</NavLink></span>

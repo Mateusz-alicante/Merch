@@ -16,6 +16,7 @@ const App = () => {
             <Route path='/auth/signup'>
                 <SignUp />
             </Route>
+            
         </>
     )
 }
