@@ -61,9 +61,10 @@ const NewItem = (props) => {
                 <SimpleTextInput value={title} onChange={setTitle} placeholder={"title"} label={"Title:"} />
                 <TextArea value={desc} onChange={setDesc} placeholder={"description"} label={"Description:"} />
                 <SimpleTextInput value={thumb} onChange={setThumb} placeholder={"url of the image of the thumbnail"} label={"Thumbnail:"} />
+                <p>For now upload the images into a service like <a href={'https://es.imgbb.com/'}>ImgBB</a></p>
                 <SimpleTextInput value={price} onChange={setPrice} placeholder={"The price of the item, a number with 2 decimals."} label={"Price:"} />
-                <TextArea value={sizes} onChange={setSizes} placeholder={"Enter the sizes, separated by a comma ','"} label={"Sizes:"} />
-                <TextArea value={images} onChange={setImages} placeholder={"Enter the url's of the images, separated by a comma ','"} label={"Images:"} />
+                <TextArea value={sizes} onChange={setSizes} placeholder={"Enter the sizes, separated by a comma and a space ', '"} label={"Sizes:"} />
+                <TextArea value={images} onChange={setImages} placeholder={"Enter the url's of the images, separated by a comma and a space ', '"} label={"Images:"} />
                 <SimpleButton disabled={status == "loading"} submit={RequestSave} >Save   <FontAwesomeIcon icon={faCloudUploadAlt} /></SimpleButton>
             </form>
         </div>

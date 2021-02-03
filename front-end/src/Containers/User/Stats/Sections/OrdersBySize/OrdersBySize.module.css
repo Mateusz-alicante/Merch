@@ -27,7 +27,8 @@
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    max-width: 100%;
+    font-size: 1em;
   }
   
   .mainTable td, .mainTable th {
@@ -46,3 +47,23 @@
     background-color: #4CAF50;
     color: white;
   }
+
+  @media (max-width:1200px) {
+    .mainTable {
+      font-size: .8em;
+    }
+
+    .outerContainer {
+      padding: .3em;
+  }
+
+}
+
+@media (max-width:850px) {
+  .mainTable {
+    font-size: .5em;
+  }
+  .mainTable td, .mainTable th {
+    padding: 2px;
+  }
+}
