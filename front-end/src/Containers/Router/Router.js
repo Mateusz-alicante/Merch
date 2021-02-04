@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import styles from './Router.module.css'
 
@@ -11,9 +11,15 @@ import UnderConstruction from '../../Components/Contruction/Contruction'
 import FrontPage from '../FrontPage/FrontPage'
 import StorePage from '../StorePage/StorePage'
 import SingleItem from '../SingleItem/SingleItem'
+import Loading from '../../Components/Loaders/Circle/Circle'
 
 import Authrouter from './NestedRouters/Auth'
-import UserRouter from './NestedRouters/User'
+const RouterLazy = React.lazy(() => import('./NestedRouters/User'))
+const UserRouter = () => (
+    <Suspense fallback={<Loading />}>
+        <RouterLazy />
+    </Suspense>
+)
 
 const Router = () => {
     return (
@@ -29,9 +35,7 @@ const Router = () => {
                             <Authrouter />
                         </Route>
 
-                        <Route path="/user" exact={false}>
-                            <UserRouter />
-                        </Route>
+                        <Route path="/user" exact={false} component={UserRouter} />
 
                         <Route path="/about">
                             <UnderConstruction />

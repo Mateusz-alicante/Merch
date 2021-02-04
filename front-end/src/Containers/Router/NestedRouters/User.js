@@ -1,15 +1,28 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
     Route,
 } from "react-router-dom";
 
 import UnderConstruction from '../../../Components/Contruction/Contruction'
 import Dashboard from '../../User/Dashboard/Dashboard'
-import NewItem from '../../User/Items/NewItem/NewItem'
 import Cart from '../../User/Cart/Cart'
 import MyOrders from '../../User/MyOrders/Orders'
 import SingleOrder from '../../User/SingleOrder/SingleOrder'
-import Stats from '../../User/Stats/Stats'
+import Loading from '../../../Components/Loaders/Circle/Circle'
+
+const StatsLazy = React.lazy(() => import('../../User/Stats/Stats'))
+const Stats = () => (
+    <Suspense fallback={<Loading />}>
+        <StatsLazy />
+    </Suspense>
+)
+
+const NewItemLazy = React.lazy(() => import('../../User/Items/NewItem/NewItem'))
+const NewItem = () => (
+    <Suspense fallback={<Loading />}>
+        <NewItemLazy />
+    </Suspense>
+);
 
 const App = () => {
     return (
@@ -22,17 +35,13 @@ const App = () => {
                 <Cart />
             </Route>
 
-            <Route path='/user/new-item' exact={true}>
-                <NewItem />
-            </Route>
+            <Route path='/user/new-item' exact={true} component={NewItem} />
 
             <Route path='/user/orders' exact={true}>
                 <MyOrders />
             </Route>
 
-            <Route path='/user/stats' exact={true}>
-                <Stats />
-            </Route>
+            <Route path='/user/stats' exact={true} component={Stats} />
 
             <Route path='/user/all-orders' exact={true}>
                 <MyOrders all={true} />
