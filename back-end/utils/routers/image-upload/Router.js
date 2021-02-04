@@ -1,23 +1,21 @@
+const { response } = require('express');
 var express = require('express')
+const imgbbUploader = require("imgbb-uploader");
+var imgur = require('imgur');
 var router = express.Router()
 
 const { nonAdminAuth, AdminAuth } = require('../../Middleware/Auth')
 
 // const toS3 = require('./ToS3')
 
-// middleware that is specific to this router
-// const fileUpload = require('express-fileupload')
 
-// router.use(fileUpload())
+router.post('/upload', AdminAuth, async (req, res) => {
 
-// define the home page route
-router.post('/upload',AdminAuth, async (req, res) => {
-    // const url = await toS3(req.files.upload)
-    res.json({
-      url: "https://urbandojo.com/wp-content/uploads/2017/04/default-image.jpg"
-    })
+  const url = await imgur.uploadBase64(req.body.image.split(',')[1])
+  res.status(200)
+  res.send(url.data.link)
 })
 
 
-  
+
 module.exports = router

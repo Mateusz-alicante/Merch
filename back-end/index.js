@@ -11,8 +11,8 @@ app.use(express.static(path.join(__dirname, '/../front-end/build')));
 app.set('trust proxy', 1);
 
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }));
+app.use(bodyParser.json({limit: '10mb'}));
 
 const AuthRouter = require('./utils/routers/Auth/Auth')
 app.use("/api/auth", AuthRouter)
@@ -25,6 +25,9 @@ app.use("/api/items", ItemRouter)
 
 const StatsRouter = require('./utils/routers/Stats/Stats')
 app.use("/api/stats", StatsRouter)
+
+const MediaRouter = require('./utils/routers/image-upload/Router')
+app.use("/api/media", MediaRouter)
 
 
 app.get('/api/test', (req, res) => {
