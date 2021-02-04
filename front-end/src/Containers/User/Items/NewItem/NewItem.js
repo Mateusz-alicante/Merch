@@ -42,18 +42,17 @@ const NewItem = (props) => {
             headers: {
                 authorization: props.redux.auth.token
             }
+        }).catch(e => {
+            setStatus(undefined)
+            toast.error('Save unsuccessful, check the inputs and try again')
+            console.log(e)
         })
         if (response && response.status === 200) {
             setStatus(undefined)
-            history.push('/user')
             toast.success('Saved successfuly', {
                 position: toast.POSITION.BOTTOM_RIGHT,
             })
-        } else {
-            setStatus(undefined)
-            toast.error('Save unsuccessful, check the inputs and try again', {
-                position: toast.POSITION.BOTTOM_RIGHT,
-            })
+            history.push('/user')
         }
     }
 

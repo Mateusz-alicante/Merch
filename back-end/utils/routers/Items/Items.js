@@ -34,27 +34,4 @@ router.get('/fetchItem', async (req, res) => {
 
 })
 
-
-// router.get('/getUserPosts', AdminAuth, async (req, res) => {
-//   posts = await Post.find({ author: req.user }).exec()
-//   res.send(posts)
-// })
-
-// router.get('/fetchPostEditor', AdminAuth, async (req, res) => {
-//   id = req.query.id
-//   const post = await Post.findById(id).select(" -__v -views").exec();
-//   res.send(post)
-
-// })
-
-
-// router.post('/updatePost', AdminAuth, async (req, res) => {
-//   data = req.body
-//   post = await Post.findOneAndUpdate({_id: req.headers.id, author: req.user}, data).exec()
-//   res.status(200)
-//   res.send('Post updated')
-// })
-
-
-
 module.exports = router
