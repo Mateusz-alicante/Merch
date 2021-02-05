@@ -11,7 +11,7 @@ import SimpleSelect from '../../../../Components/Forms/Input/SelectInput/SelectI
 import SignUpSelectOptions from './SignUpSelectOptions'
 import setAuthInfo from '../../../../Utils/Redux/Actions/Auth'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
@@ -69,6 +69,9 @@ const SignUp = (props) => {
                 <SimpleTextInput type={'password'} value={password} onChange={setPassword} placeholder={"password"} label={"Password:"}/>
                 <SimpleTextInput type={'password'} value={repeatPassword} onChange={setRepeatPassword} placeholder={"confirm password"} label={"Confirm password:"}/>
                 <SimpleButton disabled={status == "loading"} submit={RequestSignIn} >Sign Up   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
+                <div className={styles.bottomLinkContainer}>
+                    <Link to="/auth/login">Or LogIn instead</Link>
+                </div>
             </form>
         </div>
     )

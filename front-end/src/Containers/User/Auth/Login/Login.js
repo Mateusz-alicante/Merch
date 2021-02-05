@@ -12,7 +12,7 @@ import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 import setAuthInfo from '../../../../Utils/Redux/Actions/Auth'
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 
 const Login = (props) => {
 
@@ -49,6 +49,9 @@ const Login = (props) => {
                 <SimpleTextInput type={'email'} value={email} onChange={setEmail} placeholder={"email"} label={"E-mail:"}/>
                 <SimpleTextInput type={'password'} value={password} onChange={setpassword} placeholder={"password"} label={"Password:"}/>
                 <SimpleButton disabled={status == "loading"} submit={RequestLogiIn}>Log in   <FontAwesomeIcon icon={faSignInAlt} /></SimpleButton>
+                <div className={styles.bottomLinkContainer}>
+                    <Link to="/auth/signup">Or SignUp instead</Link>
+                </div>
             </form>
         </div>
     )
