@@ -16,13 +16,16 @@ import {
 
 function App() {
   return (
-    <div>
+    <div className={styles.outerContainier}>
       <Provider store={store}>
         <BrowserRouter>
           <Header />
           <Router />
           <ToastContainer position={"bottom-right"} />
         </BrowserRouter>
+        <footer className={styles.footer}>
+          <h4>Website by <a href='mailto: mateusz.alicante@gmail.com'>Mateusz Kazimierczak</a></h4>
+        </footer>
       </Provider>
     </div>
   )
