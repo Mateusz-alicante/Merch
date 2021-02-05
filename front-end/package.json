@@ -27,6 +27,7 @@
     "react-scripts": "4.0.1",
     "react-select": "^4.0.0",
     "react-spinners": "^0.10.4",
+    "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^6.2.0",
     "redux": "^4.0.5",
     "web-vitals": "^0.2.4"

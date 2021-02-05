@@ -13,7 +13,8 @@ const OrderSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now()
-    }
+    },
+    shipment: Object
 });
 
 const Order = mongoose.model('Order', OrderSchema)

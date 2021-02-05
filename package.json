@@ -23,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.13",
     "path": "^0.12.7",
+    "stripe": "^8.133.0",
     "validator": "^13.5.2"
   }
 }
