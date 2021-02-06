@@ -28,6 +28,7 @@ const SingleOrder = (props) => {
         if (response && response.status === 200) {
             setData(response.data)
             setStatus('OK')
+            console.log(response.data)
         }
     }
 
@@ -39,7 +40,7 @@ const SingleOrder = (props) => {
             }
         })
         if (response && response.status === 200) {
-            toast.success("Order has been canceled")
+            toast.success("Order has been canceled, paid amount returned")
             setActionStatus(undefined)
             history.goBack()
         }
@@ -47,13 +48,27 @@ const SingleOrder = (props) => {
 
     const FulfillOrder = async () => {
         setActionStatus("loading")
-        const response = await axios.get(`/api/orders/fulfill?id=${id}`, {
+        const response = await axios.get(`/api/orders/ship?id=${id}`, {
             headers: {
                 authorization: props.redux.auth.token
             }
         })
         if (response && response.status === 200) {
-            toast.success("Order has been fulfilled")
+            toast.success("Order has been shipped")
+            setActionStatus(undefined)
+            history.goBack()
+        }
+    }
+
+    const ReturnOrder = async () => {
+        setActionStatus("loading")
+        const response = await axios.get(`/api/orders/return?id=${id}`, {
+            headers: {
+                authorization: props.redux.auth.token
+            }
+        })
+        if (response && response.status === 200) {
+            toast.success("Order has been marked as returned, amount has been returned to the consumer")
             setActionStatus(undefined)
             history.goBack()
         }
@@ -77,8 +92,14 @@ const SingleOrder = (props) => {
                     <h2>Customer Details:</h2>
                     <div className={styles.textInfoContainer}><h3>Name:</h3> <h3>{data.authorData.name}</h3></div>
                     <div className={styles.textInfoContainer}><h3>E-mail:</h3> <h3>{data.authorData.email}</h3></div>
-                    <div className={styles.textInfoContainer}><h3>Section:</h3> <h3>{data.authorData.section}</h3></div>
-                    <div className={styles.textInfoContainer}><h3>Year:</h3> <h3>{data.authorData.year}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Phone Number:</h3> <h3>{data.authorData.phoneNumber}</h3></div>
+                </div>
+                <div className={styles.sectionContainer}>
+                    <h2>Shipment Details:</h2>
+                    <div className={styles.textInfoContainer}><h3>Name:</h3> <h3>{data.shipment.shipping_name}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>City:</h3> <h3>{`${data.shipment.shipping_address_city}, ${data.shipment.shipping_address_country}`}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Shipment address:</h3> <h3>{data.shipment.shipping_address_line1}</h3></div>
+                    <div className={styles.textInfoContainer}><h3>Zip code:</h3> <h3>{data.shipment.shipping_address_zip}</h3></div>
                 </div>
                 <div className={styles.sectionContainer}>
                     <h2>Items:</h2>
@@ -91,7 +112,7 @@ const SingleOrder = (props) => {
                     </div>
                     {data.order.map(order => <SingleItem order={order} />)}
                 </div>
-                {data.status == "InProgress" && <Actions fulfill={FulfillOrder} cancel={CancelOrder} status={actionStatus} admin={props.redux.auth.isAdmin} />}
+                <Actions orderStatus={data.status} return={ReturnOrder} ship={FulfillOrder} cancel={CancelOrder} status={actionStatus} admin={props.redux.auth.isAdmin} />
             </div>
         )
     }

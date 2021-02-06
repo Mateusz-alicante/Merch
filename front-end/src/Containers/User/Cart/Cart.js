@@ -89,11 +89,12 @@ const Cart = (props) => {
                     token={onToken}
                     description={"Compra ya tu camiseta!"}
                     shippingAddress
-                    billingAddress
                     zipCode
+                    locale={"es"}
                     email={props.redux.auth.email}
                     image={"https://image.freepik.com/free-vector/logo-sample-text_355-558.jpg"}
-                    amount={total}>
+                    amount={total}
+                    allowRememberMe={false}>
                         <Button disabled={status == "loading"} submit={() => {}}>Order   <FontAwesomeIcon icon={faCashRegister} /></Button>
                 </StripeCheckout>
                 <Button submit={() => props.dispatch(ClearCart())}><span style={{ color: "red" }}>Clear Cart <FontAwesomeIcon icon={faTrashAlt} /></span></Button>

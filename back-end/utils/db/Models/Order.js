@@ -14,7 +14,8 @@ const OrderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    shipment: Object
+    shipment: Object,
+    charge: Object
 });
 
 const Order = mongoose.model('Order', OrderSchema)

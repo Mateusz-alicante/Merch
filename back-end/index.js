@@ -12,7 +12,7 @@ app.set('trust proxy', 1);
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }));
-app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.json({ limit: '10mb' }));
 
 const AuthRouter = require('./utils/routers/Auth/Auth')
 app.use("/api/auth", AuthRouter)
@@ -31,12 +31,12 @@ app.use("/api/media", MediaRouter)
 
 
 app.get('/api/test', (req, res) => {
-    console.log("Test request recieved")
-    res.send('this text is comming from the back-end')
+  console.log("Test request recieved")
+  res.send('this text is comming from the back-end')
 })
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/../front-end/build/index.html'));
+  res.sendFile(path.join(__dirname + '/../front-end/build/index.html'));
 });
 
 

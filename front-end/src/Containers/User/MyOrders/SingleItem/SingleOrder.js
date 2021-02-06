@@ -17,6 +17,12 @@ const SingleOrder = (props) => {
         case "Fulfilled":
             statusColor = "green"
             break;
+        case "Shipped":
+            statusColor = "blue"
+            break;
+        case "Returned":
+            statusColor = "red"
+            break;
         default:
             statusColor = "black"
             break;
@@ -32,7 +38,6 @@ const SingleOrder = (props) => {
                 <h3 className={styles.textContainer}>{moment(props.order.createdAt).format('MMMM Do YYYY')}</h3>
                 <h3 style={{color: statusColor}} className={styles.textContainer}>{props.order.status}</h3>
                 {props.extended && <h3 className={styles.textContainer}>{props.order.authorData.name}</h3>}
-                {props.extended && <h3 className={styles.textContainer}>{props.order.authorData.year}</h3>}
                 <h3 className={styles.textContainer}><Link to={`/user/order/${props.order._id}`}>Details</Link></h3>
             </div>
         </div>
