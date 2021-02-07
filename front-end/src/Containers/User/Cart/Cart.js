@@ -48,7 +48,8 @@ const Cart = (props) => {
 
 
     const onToken = async (token, addresses) => {
-        setStatus('loading')
+        try {
+            setStatus('loading')
         const response = await axios.post('/api/orders/buy', {
             token,
             addresses,
@@ -65,7 +66,8 @@ const Cart = (props) => {
             })
             props.dispatch(ClearCart())
             history.push('/user/orders')
-        } else {
+        }
+        } catch (e) {
             setStatus(undefined)
             toast.error('Order unsuccessful, check the inputs and try again' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,

@@ -32,7 +32,7 @@ const Overview = (props) => {
                         <tr>
                             <th>Size</th>
                             <th>In progress</th>
-                            <th>Fulfilled</th>
+                            <th>Shipped</th>
                             <th>Cancelled</th>
                             <th>Returned</th>
                             <th>Total</th>
@@ -41,10 +41,10 @@ const Overview = (props) => {
                             <tr className={styles.row}>
                                 <td>{size}</td>
                                 <td>{orders.InProgress}</td>
-                                <td>{orders.Fulfilled}</td>
+                                <td>{orders.Shipped}</td>
                                 <td>{orders.Cancelled}</td>
                                 <td>{orders.Returned}</td>
-                                <td>{orders.InProgress + orders.Fulfilled + orders.Cancelled + orders.Returned}</td>
+                                <td>{orders.InProgress + orders.Shipped + orders.Cancelled + orders.Returned}</td>
                             </tr>
                         )))}
                     </table>

@@ -365,7 +365,7 @@ module.exports = (data) => `<!doctype html>
                                       ${item.title}
                                     </span>
                                     <br />
-                                    Camiseta
+                                    ${item.size}
                                   </td>
                                 </tr>
                               </tbody>
@@ -388,7 +388,6 @@ module.exports = (data) => `<!doctype html>
                             <td width='50%'>
                             </td>
                             <td style='text-align:right; padding-right: 10px; border-top: 1px solid #cccccc;'>
-                              <br />
                               <br />
                               <span style='display: inline-block;font-weight: bold; color: #4d4d4d'>
                                 Total
@@ -441,7 +440,7 @@ module.exports = (data) => `<!doctype html>
                             <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;line-height:1;text-align:center;'>
-                                  1234 Awesome St
+                                  ${"Ante cualquier problema con tu pedido, por favor responde a este correo"}
                                 </div>
                               </td>
                             </tr>
