@@ -109,6 +109,7 @@ const SingleOrder = (props) => {
                         <div className={styles.textContainer}><h3>Quantity</h3></div>
                         <div className={styles.textContainer}><h3>Price</h3></div>
                         <div className={styles.textContainer}><h3>Size</h3></div>
+                        <div className={styles.textContainer}><h3>Color</h3></div>
                     </div>
                     {data.order.map(order => <SingleItem order={order} />)}
                 </div>

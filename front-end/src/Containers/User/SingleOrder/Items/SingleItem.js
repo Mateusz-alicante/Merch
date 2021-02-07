@@ -34,6 +34,7 @@ const SingleItem = (props) => {
             </div>
             <div className={styles.textContainer}><h3>{`${parseFloat(data.price / 100)} €`}</h3></div>
             <div className={styles.textContainer}><h3>{props.order.size}</h3></div>
+            <div className={styles.textContainer}><h3>{props.order.color}</h3></div>
         </div>
     )
 

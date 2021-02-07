@@ -15,6 +15,7 @@ const SinglePost = () => {
         const response = await axios.get(`/api/items/fetchItem?id=${id}`)
         if (response && response.status === 200) {
             setData(response.data)
+            console.log(response.data)
             setStatus('OK')
         }
     }

@@ -6,6 +6,7 @@ const OrderSchema = new mongoose.Schema({
     author: Object,
     authorData: Object,
     amount: Number,
+    color: String,
     status: {
         type: String,
         default: "InProgress"

@@ -33,16 +33,20 @@ router.get('/', AdminAuth, async (req, res) => {
 
     items.forEach(item => {
         ordersBySize = {}
-        item.sizes.forEach(size => {
-            ordersBySize[size] = {
-                InProgress: 0,
-                Shipped: 0,
-                Cancelled: 0,
-                Returned: 0
-            }
+        item.colors.forEach(color => {
+            ordersBySize[color] = {}
+            item.sizes.forEach(size => {
+                ordersBySize[color][size] = {
+                    InProgress: 0,
+                    Shipped: 0,
+                    Cancelled: 0,
+                    Returned: 0
+                }
+            })
         })
         stats.items[item._id] = {
             title: item.title,
+            id: item._id,
             thumb: item.thumbnail,
             price: item.price,
             ordersBySize,
@@ -51,7 +55,7 @@ router.get('/', AdminAuth, async (req, res) => {
 
     orders.forEach(order => {
         order.order.forEach(item => {
-            stats.items[item.item].ordersBySize[item.size][order.status] = stats.items[item.item].ordersBySize[item.size][order.status] + item.quantity
+            stats.items[item.item].ordersBySize[item.color][item.size][order.status] = stats.items[item.item].ordersBySize[item.color][item.size][order.status] + item.quantity
         })
     })
 

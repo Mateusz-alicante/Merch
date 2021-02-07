@@ -24,6 +24,13 @@ const NewItem = () => (
     </Suspense>
 );
 
+const ModStockLazy = React.lazy(() => import('../../User/Items/ModStock/ModStock'))
+const ModStock = () => (
+    <Suspense fallback={<Loading />}>
+        <ModStockLazy />
+    </Suspense>
+);
+
 const App = () => {
     return (
         <>
@@ -49,6 +56,10 @@ const App = () => {
 
             <Route path='/user/order/:id' exact={true}>
                 <SingleOrder />
+            </Route>
+
+            <Route path='/user/modStock/:id' exact={true}>
+                <ModStock />
             </Route>
 
 

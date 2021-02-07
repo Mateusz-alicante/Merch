@@ -4,12 +4,7 @@ import styles from './Item.module.css'
 
 import ImageGallery from 'react-image-gallery';
 import { toast } from 'react-toastify'
-
-import SelectInput from '../../../Components/Forms/Input/SelectInput/SelectInput'
-import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
+import OrderOptions from './OrderOptions/OrderOptions'
 
 import { AddItem } from '../../../Utils/Redux/Actions/Cart'
 import { connect } from 'react-redux'
@@ -17,6 +12,7 @@ import { connect } from 'react-redux'
 const Item = ({ data, redux, dispatch }) => {
 
     const [size, setSize] = useState('')
+    const [color, setColor] = useState('')
     const [status, setStatus] = useState(undefined)
     const history = useHistory()
 
@@ -24,11 +20,13 @@ const Item = ({ data, redux, dispatch }) => {
     const AddToCart = () => {
         if (size == "") {
             toast.error("Please choose a size")
+        } else if (color == "") {
+            toast.error("Please choose a size")
         } else if (!redux.auth.isLoggedIn) {
             toast.error("Please log in before adding items to cart")
             history.push('/auth/login')
         } else {
-            dispatch(AddItem({ item: data._id, size: size.value, price: data.price }))
+            dispatch(AddItem({ item: data._id, size: size.value, price: data.price, color: color.value }))
             toast.success("Item added to cart")
             history.push('/user/cart')
         }
@@ -56,10 +54,7 @@ const Item = ({ data, redux, dispatch }) => {
                 </div>
                 <div className={styles.formContainer}>
                     <h1 className={styles.orderButton}>Order Now:</h1>
-                    <div>
-                        <SelectInput options={data.sizes.map(size => ({ value: size, label: size }))} onChange={setSize} value={size} label={"Select a size"} />
-                        <Button submit={AddToCart} disabled={status == "loading"}>Add to cart   <FontAwesomeIcon icon={faShoppingBasket} /></Button>
-                    </div>
+                    <OrderOptions AddToCart={AddToCart} status={status} data={data} setSize={setSize} size={size} color={color} setColor={setColor} />
                 </div>
             </div>
         </div>
