@@ -234,6 +234,8 @@ router.get('/cancel', nonAdminAuth, async (req, res) => {
     html: email(mailData), // html body
   });
 
+  console.log(info)
+
   } catch (e) {
     console.log(e)
     res.status(400)
