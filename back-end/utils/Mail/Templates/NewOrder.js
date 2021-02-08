@@ -365,7 +365,7 @@ module.exports = (data) => `<!doctype html>
                                       ${item.title}
                                     </span>
                                     <br />
-                                    ${item.size}
+                                    ${`${item.size}, ${item.color}`}
                                   </td>
                                 </tr>
                               </tbody>
@@ -433,7 +433,7 @@ module.exports = (data) => `<!doctype html>
                             <tr>
                               <td align='center' style='font-size:0px;padding:5px 25px;word-break:break-word;'>
                                 <div style='color:#777777;font-family:Oxygen, Helvetica neue, sans-serif;font-size:14px;font-style:bold;font-weight:700;line-height:21px;text-align:center;'>
-                                  ${"Nombre empresa"}
+                                  ${"Dikaas"}
                                 </div>
                               </td>
                             </tr>

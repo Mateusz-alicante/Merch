@@ -53,13 +53,14 @@ router.post('/buy', nonAdminAuth, async (req, res) => {
         title: item.title,
         quantity: order.order.find(it => it.item == item._id).quantity,
         price: `${parseFloat(item.price / 100)} €`,
-        size: order.order.find(it => it.item == item._id).size
+        size: order.order.find(it => it.item == item._id).size,
+        color: order.order.find(it => it.item == item._id).color
       }))
     }
     let info = await transporter.sendMail({
       from: `"Paula 👻" <${process.env.MailAddress}>`, // sender address
       to: order.authorData.email, // list of receivers
-      subject: "Hola ✔", // Subject line
+      subject: "Hola ✔, hemos recibido tu pedido!", // Subject line
       html: email(mailData), // html body
     });
 
@@ -136,7 +137,7 @@ router.get('/ship', AdminAuth, async (req, res) => {
   let info = await transporter.sendMail({
     from: `"Paula 👻" <${process.env.MailAddress}>`, // sender address
     to: order.authorData.email, // list of receivers
-    subject: "Hola ✔", // Subject line
+    subject: "Hola ✔, hemos enviado tu pedido!", // Subject line
     html: email(mailData), // html body
   });
 
@@ -176,7 +177,7 @@ router.get('/return', AdminAuth, async (req, res) => {
   let info = await transporter.sendMail({
     from: `"Paula 👻" <${process.env.MailAddress}>`, // sender address
     to: order.authorData.email, // list of receivers
-    subject: "Hola ✔", // Subject line
+    subject: "Hola ✔, hemos devuelto tu pedido!", // Subject line
     html: email(mailData), // html body
   });
 
@@ -229,7 +230,7 @@ router.get('/cancel', nonAdminAuth, async (req, res) => {
   let info = await transporter.sendMail({
     from: `"Paula 👻" <${process.env.MailAddress}>`, // sender address
     to: order.authorData.email, // list of receivers
-    subject: "Hola ✔", // Subject line
+    subject: "Hola ✔, hemos cancelado tu pedido.", // Subject line
     html: email(mailData), // html body
   });
 
