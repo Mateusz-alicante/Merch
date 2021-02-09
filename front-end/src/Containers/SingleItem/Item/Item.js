@@ -5,6 +5,7 @@ import styles from './Item.module.css'
 import ImageGallery from 'react-image-gallery';
 import { toast } from 'react-toastify'
 import OrderOptions from './OrderOptions/OrderOptions'
+import { Link } from 'react-router-dom'
 
 import { AddItem } from '../../../Utils/Redux/Actions/Cart'
 import { connect } from 'react-redux'
@@ -32,8 +33,17 @@ const Item = ({ data, redux, dispatch }) => {
         }
     }
 
+    const adminOptions = () => (
+        <Link to={`/user/modStock/${data._id}`} >
+            <div className={styles.adminOption}>
+                <h2>Modify this item</h2>
+            </div>
+        </Link>
+    )
+
     return (
         <div>
+            {redux.auth.isAdmin && adminOptions()}
             <div className={styles.imageContainer}>
                 <ImageGallery showFullscreenButton={false} autoPlay={true} additionalClass={styles.galery} showThumbnails={false} items={data.images.map(image => ({ original: image }))} />
             </div>

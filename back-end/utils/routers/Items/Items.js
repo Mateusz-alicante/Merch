@@ -35,8 +35,8 @@ router.post('/saveItem', AdminAuth, async (req, res) => {
   }
 })
 
-router.post('/updateStock', AdminAuth, async (req, res) => {
-  item = await Item.findByIdAndUpdate(req.body.id, {stock: req.body.stock})
+router.post('/update', AdminAuth, async (req, res) => {
+  item = await Item.findByIdAndUpdate(req.body.id, {...req.body})
   res.status(200)
   res.send("Stock modified")
   console.log('recieved update request')
