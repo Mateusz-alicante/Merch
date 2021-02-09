@@ -12,7 +12,7 @@ import SingleItem from './SingleItem/SingleItem'
 import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faCashRegister } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faCashRegister, faHandHoldingUsd, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 
 const StripeKey = "pk_test_51IHZNfJiVjeAZDOg8w4GaLJRlFu5zpET8yjZtZSWrEJ5Op7KPGWmmjbf5Qv7YeZZVLmt31bC5QLfrEYtF8HBhhWu00I9o3tVW6"
 
@@ -58,7 +58,6 @@ const Cart = (props) => {
             headers: {
                 authorization: props.redux.auth.token
             }})
-        console.log(response)
         if (response && response.status === 200) {
             setStatus(undefined) 
             toast.success('Order successful' ,{
@@ -68,6 +67,33 @@ const Cart = (props) => {
             history.push('/user/orders')
         }
         } catch (e) {
+            console.log(e)
+            setStatus(undefined)
+            toast.error('Order unsuccessful, check the inputs and try again' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
+        }
+    }
+
+    const buyInPerson = async () => {
+        try {
+            setStatus('loading')
+        const response = await axios.post('/api/orders/buyInPerson', {
+            order: props.redux.cart
+        }, {
+            headers: {
+                authorization: props.redux.auth.token
+            }})
+        if (response && response.status === 200) {
+            setStatus(undefined) 
+            toast.success('Order successful' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+            })
+            props.dispatch(ClearCart())
+            history.push('/user/orders')
+        }
+        } catch (e) {
+            console.log(e)
             setStatus(undefined)
             toast.error('Order unsuccessful, check the inputs and try again' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -97,9 +123,10 @@ const Cart = (props) => {
                     image={"https://image.freepik.com/free-vector/logo-sample-text_355-558.jpg"}
                     amount={total}
                     allowRememberMe={false}>
-                        <Button disabled={status == "loading"} submit={() => {}}>Order   <FontAwesomeIcon icon={faCashRegister} /></Button>
+                        <Button disabled={status == "loading"} submit={() => {}}>Pay with card   <FontAwesomeIcon icon={faCreditCard} /></Button>
                 </StripeCheckout>
-                <Button submit={() => props.dispatch(ClearCart())}><span style={{ color: "red" }}>Clear Cart <FontAwesomeIcon icon={faTrashAlt} /></span></Button>
+                <Button disabled={status == "loading"} submit={buyInPerson}>Pay in person   <FontAwesomeIcon icon={faHandHoldingUsd} /></Button>
+                <div className={styles.clearButton}><Button  submit={() => props.dispatch(ClearCart())}><span style={{ color: "red" }}>Clear Cart <FontAwesomeIcon icon={faTrashAlt} /></span></Button></div>
             </div>
         </div>
     )

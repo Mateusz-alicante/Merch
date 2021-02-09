@@ -72,6 +72,53 @@ router.post('/buy', nonAdminAuth, async (req, res) => {
 })
 
 
+router.post('/buyInPerson', nonAdminAuth, async (req, res) => {
+  try {
+    const user_id = req.user.data
+    const data = req.body
+    const docs = await Promise.all([User.findById(user_id).select(" -__v -password").exec(), Item.find({'_id': { $in: data.order.map(order => order.item) }}).exec()])
+
+    const user = docs[0]
+    const items = docs[1]
+
+    const amount =  items.reduce((acc, item) => acc + item.price * data.order.find(order => order.item == item._id).quantity, 0)
+    order = new Order({ order: data.order, author: req.user.data, authorData: user, amount, shipment: "In Person", charge: "In Person" })
+    await order.save()
+    res.status(200)
+    res.send(order._id)
+
+    const mailData = {
+      title: "Tu pedido ha sido creado!",
+      description: "Hemos recibido tu pedido, Cunato antes te contactaremos, para organizar el pago y la entrega",
+      shipmentAddress: `En Persona`,
+      date: moment(order.createdAt).format('DD-MM-YYYY'),
+      id: `#${order._id}`,
+      total: `${parseFloat(order.amount / 100)} €`,
+      items: items.map((item) => ({
+        thumb: item.thumbnail,
+        title: item.title,
+        quantity: order.order.find(it => it.item == item._id).quantity,
+        price: `${parseFloat(item.price / 100)} €`,
+        size: order.order.find(it => it.item == item._id).size,
+        color: order.order.find(it => it.item == item._id).color
+      }))
+    }
+    let info = await transporter.sendMail({
+      from: `"Paula 👻" <${process.env.MailAddress}>`, // sender address
+      to: order.authorData.email, // list of receivers
+      subject: "Hola ✔, hemos recibido tu pedido!", // Subject line
+      html: email(mailData), // html body
+    });
+
+  } catch (e) {
+    console.log(e)
+    res.status(400)
+    res.send(e)
+  }
+})
+
+
+
 router.post('/loadMyOrders', nonAdminAuth, async (req, res) => {
   const orders = await Order.find({ author: req.user.data })
     .select(" -__v -author -payment")
@@ -148,9 +195,11 @@ router.get('/return', AdminAuth, async (req, res) => {
     id = req.query.id
   const order = await Order.findById(id)
 
-  await stripe.refunds.create({
-    charge: order.charge.id,
-  });
+  if (order.charge != "In Person") {
+    await stripe.refunds.create({
+      charge: order.charge.id,
+    });
+  }
 
   order.status = "Returned"
   await order.save()
@@ -201,9 +250,11 @@ router.get('/cancel', nonAdminAuth, async (req, res) => {
     res.send("Not Authorized")
   }
 
-  await stripe.refunds.create({
-    charge: order.charge.id,
-  });
+  if (order.charge != "In Person") {
+    await stripe.refunds.create({
+      charge: order.charge.id,
+    });
+  }
 
   order.status = "Cancelled"
   await order.save()

@@ -1,9 +1,9 @@
-.outerContainier {
+/* .outerContainier {
     height:100vh; 
     margin:0;
     display:flex; 
     flex-direction:column; 
-}
+} */
 
 .footer {
     margin-top:auto; 
@@ -13,4 +13,21 @@
     align-items: center;
     justify-content: center;
     font-size: .8em;
+}
+
+.image {
+    display: block;
+    width: 30%;
+    margin: auto;
+}
+
+@media (max-width:800px) {
+    .image {
+        width: 60%;
+    }
+}
+
+.routerContainer {
+    min-height: 90vh;
+    height: auto;
 }

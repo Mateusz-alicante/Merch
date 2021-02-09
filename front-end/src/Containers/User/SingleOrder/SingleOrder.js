@@ -16,7 +16,7 @@ const SingleOrder = (props) => {
     const { id } = useParams()
     const [data, setData] = useState({})
     const [status, setStatus] = useState('loading')
-    const [actionStatus, setActionStatus] = useState('loading')
+    const [actionStatus, setActionStatus] = useState(undefined)
     const history = useHistory()
 
     const fetchArticle = async () => {
@@ -33,6 +33,7 @@ const SingleOrder = (props) => {
     }
 
     const CancelOrder = async () => {
+        console.log('cancel')
         setActionStatus("loading")
         const response = await axios.get(`/api/orders/cancel?id=${id}`, {
             headers: {
@@ -79,6 +80,15 @@ const SingleOrder = (props) => {
         fetchArticle()
     }, [])
 
+    const shipment = () => (
+        <>
+            <div className={styles.textInfoContainer}><h3>Name:</h3> <h3>{data.shipment.shipping_name}</h3></div>
+            <div className={styles.textInfoContainer}><h3>City:</h3> <h3>{`${data.shipment.shipping_address_city}, ${data.shipment.shipping_address_country}`}</h3></div>
+            <div className={styles.textInfoContainer}><h3>Shipment address:</h3> <h3>{data.shipment.shipping_address_line1}</h3></div>
+            <div className={styles.textInfoContainer}><h3>Zip code:</h3> <h3>{data.shipment.shipping_address_zip}</h3></div>
+        </>
+    )
+
     const LoadedContent = () => {
         return (
             <div>
@@ -96,10 +106,7 @@ const SingleOrder = (props) => {
                 </div>
                 <div className={styles.sectionContainer}>
                     <h2>Shipment Details:</h2>
-                    <div className={styles.textInfoContainer}><h3>Name:</h3> <h3>{data.shipment.shipping_name}</h3></div>
-                    <div className={styles.textInfoContainer}><h3>City:</h3> <h3>{`${data.shipment.shipping_address_city}, ${data.shipment.shipping_address_country}`}</h3></div>
-                    <div className={styles.textInfoContainer}><h3>Shipment address:</h3> <h3>{data.shipment.shipping_address_line1}</h3></div>
-                    <div className={styles.textInfoContainer}><h3>Zip code:</h3> <h3>{data.shipment.shipping_address_zip}</h3></div>
+                    {data.shipment == "In Person" ? <h1>The Customer requested to recieve the order in person</h1> : shipment()}
                 </div>
                 <div className={styles.sectionContainer}>
                     <h2>Items:</h2>
