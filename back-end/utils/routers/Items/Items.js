@@ -12,7 +12,6 @@ router.post('/saveItem', AdminAuth, async (req, res) => {
     data.sizes.forEach(size => {
       stock[size] = {}
       data.colors.forEach(color => {
-        console.log(size, color)
         try {
           if (data.stock[size][color] !== undefined) {
             stock[size][color] = data.stock[size][color]
@@ -24,6 +23,7 @@ router.post('/saveItem', AdminAuth, async (req, res) => {
         }
       })
     })
+    console.log(data)
     item = new Item({ ...data, author: req.user, stock })
     await item.save()
     res.status(200)

@@ -16,7 +16,6 @@ const ItemSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        minlength: 1,
         required: true
     },
     thumbnail: {
