@@ -12,6 +12,7 @@ import FrontPage from '../FrontPage/FrontPage'
 import StorePage from '../StorePage/StorePage'
 import SingleItem from '../SingleItem/SingleItem'
 import Loading from '../../Components/Loaders/Circle/Circle'
+import About from '../About/About'
 
 import Authrouter from './NestedRouters/Auth'
 const RouterLazy = React.lazy(() => import('./NestedRouters/User'))
@@ -38,7 +39,7 @@ const Router = () => {
                         <Route path="/user" exact={false} component={UserRouter} />
 
                         <Route path="/about">
-                            <UnderConstruction />
+                            <About />
                         </Route>
 
                         <Route path="/Store">
