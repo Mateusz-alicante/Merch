@@ -128,31 +128,27 @@ router.post('/loadMyOrders', nonAdminAuth, async (req, res) => {
 
 router.post('/loadAllOrders', AdminAuth, async (req, res) => {
 
-  let orders = await Order.find()
   if (req.body == {}) {
+    const orders = await Order.find()
+    res.status(200)
     return res.send(orders)
+
   } else {
+
+    let options = {}
+
     if (req.body.name) {
-      const matching = order.filter(OWA => OWA.author.name.toLowerCase().includes(req.body.name.toLowerCase()))
-      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
+      options['authorData.name'] = {$regex: new RegExp(req.body.name, 'i')}
     }
 
     if (req.body.email) {
-      const matching = OrderWithAuthor.filter(OWA => OWA.author.email.toLowerCase().includes(req.body.email.toLowerCase()))
-      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
+      options['authorData.email'] = {$regex: new RegExp(req.body.email, 'i')}
     }
 
-    if (req.body.year) {
-      const matching = OrderWithAuthor.filter(OWA => OWA.author.year.toString().toLowerCase().includes(req.body.year.toLowerCase()))
-      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
+    if (req.body.status) {
+      options['status'] = req.body.status
     }
-
-    if (req.body.section) {
-      const matching = OrderWithAuthor.filter(OWA => OWA.author.section.toLowerCase().includes(req.body.section.toLowerCase()))
-      orders = orders.filter(order => matching.map(OWA => OWA.order._id).includes(order._id))
-    }
-
-
+    const orders = await Order.find(options)
     res.status(200)
     return res.send(orders)
   }
