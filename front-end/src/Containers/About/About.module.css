@@ -17,5 +17,8 @@
         font-size: 1em;
         padding: .5em;
     }
+    .textContainier img {
+        border-radius: .1em;
+    }
     
 }
