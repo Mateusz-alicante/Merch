@@ -14,7 +14,7 @@ import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faCashRegister, faHandHoldingUsd, faCreditCard } from "@fortawesome/free-solid-svg-icons";
 
-const StripeKey = "pk_test_51IHY7MIxr9UcHCbVwg6eLWaVwGQFyoaD4WMIuhNibEjNzCbuR106BzPlWHVRT2O4MZ5IQgSr1BYyn7RgRi3U0Fir00YAVdipaG"
+const StripeKey = "pk_live_51IHY7MIxr9UcHCbVIjfV3Ijzyb9V6C4CNs9hMz01qdmonry2dptCkmsV8I0KeTNPgCWbvA5PtUgZulIxmeJ7AK0000I2w6aam6"
 
 const Cart = (props) => {
 
