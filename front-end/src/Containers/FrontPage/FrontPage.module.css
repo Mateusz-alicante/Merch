@@ -39,4 +39,8 @@
     .imageTextContainer {
         padding: 0.1em;
     }
+    .galleryContainer {
+        width: 100%;
+    }
+    
 }
