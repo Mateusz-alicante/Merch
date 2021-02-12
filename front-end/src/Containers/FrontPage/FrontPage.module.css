@@ -13,6 +13,24 @@
     padding: .1em;
 }
 
+.textContainer {
+    background-color: rgb(255, 246, 234);
+    border-radius: 1em;
+    font-size: 3em;
+    padding: .5em;
+    text-align: center;
+    margin: 2em 0;
+}
+
+.title {
+    font-family: Lobster;
+}
+
+.galleryContainer {
+    width: 60%;
+    margin: auto;
+    font-size: 1em;
+}
 
 @media (max-width:950px) {
     .textContainer {
