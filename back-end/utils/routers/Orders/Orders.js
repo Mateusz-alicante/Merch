@@ -174,7 +174,9 @@ router.get('/ship', AdminAuth, async (req, res) => {
       thumb: item.thumbnail,
       title: item.title,
       quantity: order.order.find(it => it.item == item._id).quantity,
-      price: `${parseFloat(item.price / 100)} €`
+      price: `${parseFloat(item.price / 100)} €`,
+      size: order.order.find(it => it.item == item._id).size,
+      color: order.order.find(it => it.item == item._id).color
     }))
   }
   let info = await transporter.sendMail({
@@ -216,7 +218,9 @@ router.get('/return', AdminAuth, async (req, res) => {
       thumb: item.thumbnail,
       title: item.title,
       quantity: order.order.find(it => it.item == item._id).quantity,
-      price: `${parseFloat(item.price / 100)} €`
+      price: `${parseFloat(item.price / 100)} €`,
+      size: order.order.find(it => it.item == item._id).size,
+      color: order.order.find(it => it.item == item._id).color
     }))
   }
   let info = await transporter.sendMail({
@@ -271,7 +275,9 @@ router.get('/cancel', nonAdminAuth, async (req, res) => {
       thumb: item.thumbnail,
       title: item.title,
       quantity: order.order.find(it => it.item == item._id).quantity,
-      price: `${parseFloat(item.price / 100)} €`
+      price: `${parseFloat(item.price / 100)} €`,
+      size: order.order.find(it => it.item == item._id).size,
+      color: order.order.find(it => it.item == item._id).color
     }))
   }
   let info = await transporter.sendMail({

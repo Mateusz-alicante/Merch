@@ -40,6 +40,10 @@
     transition: all .2s ease-in-out;
 }
 
+.imageLinkText {
+    font-size: .5em;
+}
+
 @media (min-width:600px) { 
     .adminOption:hover {
         transform: scale(1.1);
@@ -50,5 +54,8 @@
 @media (max-width:900px) {
     .outerContainer {
         width: 100%;
+    }
+    .imageLinkText {
+        font-size: 1em;
     }
 }
