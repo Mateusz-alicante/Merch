@@ -12,7 +12,8 @@
 .buttonGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    column-gap: 2em;
+    column-gap: 3em;
+    margin: 0 3em;
 }
 
 .ItemsMessage {
@@ -26,11 +27,21 @@
     justify-content: space-around;
 }
 
+.clearButton {
+    grid-column: 1 / 3;
+}
+
 @media (max-width:600px) {
     .buttonGrid {
         grid-template-columns: 1fr;
+        column-gap: 1.5em;
+        margin: 0 1em;
     }
     .textContainer {
         font-size: .7em;
     }
+    .clearButton {
+        grid-column: auto;
+    }
+    
 }

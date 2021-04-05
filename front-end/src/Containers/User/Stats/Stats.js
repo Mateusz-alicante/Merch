@@ -24,6 +24,7 @@ const Stats = (props) => {
         if (response && response.status === 200) {
             setData(response.data)
             setStatus(undefined)
+            console.log(data)
         } else {
             setStatus(undefined)
             toast.error('request unsuccessful, try again later')

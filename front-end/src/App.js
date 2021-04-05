@@ -10,6 +10,8 @@ import store from './Utils/Redux/StoreConfig'
 import Router from './Containers/Router/Router'
 import Header from './Containers/Nav/Nav'
 
+import skate from './Assets/Images/skate.png'
+
 import {
   BrowserRouter,
 } from "react-router-dom";
@@ -19,8 +21,11 @@ function App() {
     <div className={styles.outerContainier}>
       <Provider store={store}>
         <BrowserRouter>
+          <img src={skate} className={styles.image} />
           <Header />
-          <Router />
+          <div className={styles.routerContainer}>
+            <Router />
+          </div>
           <ToastContainer position={"bottom-right"} />
         </BrowserRouter>
         <footer className={styles.footer}>

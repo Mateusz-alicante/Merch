@@ -16,7 +16,6 @@ const ItemSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        minlength: 1,
         required: true
     },
     thumbnail: {
@@ -26,8 +25,9 @@ const ItemSchema = new mongoose.Schema({
     },
     images: [String],
     visible: {type: Boolean, default: true},
-    inStock : {type: Boolean, default: true},
+    stock : Object,
     sizes: [String],
+    colors: [String],
     views: {type: Number, default: 0},
     author: String,
     createdAt: {

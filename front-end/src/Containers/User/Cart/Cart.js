@@ -3,6 +3,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import styles from './Cart.module.css'
 import { useHistory } from 'react-router-dom'
+import StripeCheckout from 'react-stripe-checkout';
 
 import { connect } from 'react-redux'
 import { ClearCart } from '../../../Utils/Redux/Actions/Cart'
@@ -11,7 +12,9 @@ import SingleItem from './SingleItem/SingleItem'
 import Button from '../../../Components/Forms/Button/SimpleButton/SimpleButton'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faCashRegister } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt, faCashRegister, faHandHoldingUsd, faCreditCard } from "@fortawesome/free-solid-svg-icons";
+
+const StripeKey = "pk_live_51IHY7MIxr9UcHCbVIjfV3Ijzyb9V6C4CNs9hMz01qdmonry2dptCkmsV8I0KeTNPgCWbvA5PtUgZulIxmeJ7AK0000I2w6aam6"
 
 const Cart = (props) => {
 
@@ -19,15 +22,42 @@ const Cart = (props) => {
     const [status, setStatus] = useState(undefined)
     const history = useHistory()
 
-    const Order = async () => {
-        setStatus('loading')
-        const response = await axios.post('/api/orders/new', {
+    // const Order = async () => {
+    //     setStatus('loading')
+    //     const response = await axios.post('/api/orders/new', {
+    //         order: props.redux.cart
+    //     }, {
+    //         headers: {
+    //             authorization: props.redux.auth.token
+    //         }})
+    //     console.log(response)
+    //     if (response && response.status === 200) {
+    //         setStatus(undefined) 
+    //         toast.success('Order successful' ,{
+    //             position: toast.POSITION.BOTTOM_RIGHT,
+    //         })
+    //         props.dispatch(ClearCart())
+    //         history.push('/user/orders')
+    //     } else {
+    //         setStatus(undefined)
+    //         toast.error('Order unsuccessful, check the inputs and try again' ,{
+    //             position: toast.POSITION.BOTTOM_RIGHT,
+    //           })
+    //     }
+    // }
+
+
+    const onToken = async (token, addresses) => {
+        try {
+            setStatus('loading')
+        const response = await axios.post('/api/orders/buy', {
+            token,
+            addresses,
             order: props.redux.cart
         }, {
             headers: {
                 authorization: props.redux.auth.token
             }})
-        console.log(response)
         if (response && response.status === 200) {
             setStatus(undefined) 
             toast.success('Order successful' ,{
@@ -35,7 +65,35 @@ const Cart = (props) => {
             })
             props.dispatch(ClearCart())
             history.push('/user/orders')
-        } else {
+        }
+        } catch (e) {
+            console.log(e)
+            setStatus(undefined)
+            toast.error('Order unsuccessful, check the inputs and try again' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+              })
+        }
+    }
+
+    const buyInPerson = async () => {
+        try {
+            setStatus('loading')
+        const response = await axios.post('/api/orders/buyInPerson', {
+            order: props.redux.cart
+        }, {
+            headers: {
+                authorization: props.redux.auth.token
+            }})
+        if (response && response.status === 200) {
+            setStatus(undefined) 
+            toast.success('Order successful' ,{
+                position: toast.POSITION.BOTTOM_RIGHT,
+            })
+            props.dispatch(ClearCart())
+            history.push('/user/orders')
+        }
+        } catch (e) {
+            console.log(e)
             setStatus(undefined)
             toast.error('Order unsuccessful, check the inputs and try again' ,{
                 position: toast.POSITION.BOTTOM_RIGHT,
@@ -53,8 +111,22 @@ const Cart = (props) => {
             <div>{props.redux.cart.map((BasicItem) => <SingleItem item={BasicItem} />)}</div>
             <div className={styles.totlaContainer}><h2>Total:</h2> <h2>{`${parseFloat(total / 100)} €`}</h2></div>
             <div className={styles.buttonGrid}>
-                <Button disabled={status == "loading"} submit={Order}>Order   <FontAwesomeIcon icon={faCashRegister} /></Button>
-                <Button submit={() => props.dispatch(ClearCart())}><span style={{ color: "red" }}>Clear Cart <FontAwesomeIcon icon={faTrashAlt} /></span></Button>
+                
+                <StripeCheckout 
+                    stripeKey={StripeKey}
+                    token={onToken}
+                    description={"Compra ya tu camiseta!"}
+                    shippingAddress
+                    zipCode
+                    locale={"es"}
+                    email={props.redux.auth.email}
+                    image={"https://image.freepik.com/free-vector/logo-sample-text_355-558.jpg"}
+                    amount={total}
+                    allowRememberMe={false}>
+                        <Button disabled={status == "loading"} submit={() => {}}>Pay with card   <FontAwesomeIcon icon={faCreditCard} /></Button>
+                </StripeCheckout>
+                <Button disabled={status == "loading"} submit={buyInPerson}>Pay in person   <FontAwesomeIcon icon={faHandHoldingUsd} /></Button>
+                <div className={styles.clearButton}><Button  submit={() => props.dispatch(ClearCart())}><span style={{ color: "red" }}>Clear Cart <FontAwesomeIcon icon={faTrashAlt} /></span></Button></div>
             </div>
         </div>
     )

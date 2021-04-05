@@ -49,7 +49,6 @@ const Orders = (props) => {
                 <div className={styles.textContainer}><h3>Date Ordered</h3></div>
                 <div className={styles.textContainer}><h3>Status</h3></div>
                 {props.all && <div className={styles.textContainer}><h3>Name</h3></div>}
-                {props.all && <div className={styles.textContainer}><h3>Year</h3></div>}
                 <div className={styles.textContainer}><h3>Details</h3></div>
             </div>
             {status == "loading" ? <Loader /> : (( !orders || orders.length == 0 ) ? <h1 className={styles.ItemsMessage}>{ props.all ? "No order created yet" : "You have no orders yet"}</h1> : OrdersContent())}

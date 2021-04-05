@@ -14,22 +14,16 @@ const userSchema = new mongoose.Schema({
         minlength: 5,
         required: true
     },
-    year: {
-        type: String,
-        minlength: 1,
-        required: true
-    },
-    section: {
-        type: String,
-        minlength: 1,
-        required: true
-    },
     password: {
         type: String,
         minlength: 3,
         required: true
     },
-    orders: Array,
+    phoneNumber: {
+        type: String,
+        required: true,
+        unique: true
+    },
     isAdmin: {type: Boolean, default: false},
     createdAt: {
         type: Date,

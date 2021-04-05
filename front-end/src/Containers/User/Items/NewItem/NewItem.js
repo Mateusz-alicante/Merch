@@ -8,6 +8,7 @@ import SimpleButton from '../../../../Components/Forms/Button/SimpleButton/Simpl
 import TextArea from '../../../../Components/Forms/Input/TextArea/TextArea'
 
 import MultipleImageUplaod from './MultipleImageUplaod/MultipleImageUplaod'
+import StockMatrix from '../../../../Components/Forms/StockMatrix/StockMatrix'
 
 import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -26,6 +27,8 @@ const NewItem = (props) => {
     const [price, setPrice] = useState("")
     const [status, setStatus] = useState(undefined)
     const [images, setImages] = useState({})
+    const [colors, setColors] = useState("")
+    const [stock, setStock] = useState({})
 
     const history = useHistory()
 
@@ -37,7 +40,9 @@ const NewItem = (props) => {
             description: desc,
             price: parseInt(Math.ceil(price * 100)),
             sizes: sizes.split(', ').map(size => size.trim()),
-            images: Object.keys(images).map(key => images[key])
+            images: Object.keys(images).map(key => images[key]),
+            stock,
+            colors: colors.split(', ').map(size => size.trim())
         }, {
             headers: {
                 authorization: props.redux.auth.token
@@ -104,8 +109,9 @@ const NewItem = (props) => {
                 <MultipleImageUplaod label={'Thumbnail Upload'} single={true} handleImageChange={handleThumbChange} />
                 <SimpleTextInput value={price} onChange={setPrice} placeholder={"The price of the item, a number with 2 decimals."} label={"Price:"} />
                 <TextArea value={sizes} onChange={setSizes} placeholder={"Enter the sizes, separated by a comma and a space ', '"} label={"Sizes:"} />
-                {/* <TextArea value={images} onChange={setImages} placeholder={"Enter the url's of the images, separated by a comma and a space ', '"} label={"Images:"} /> */}
+                <TextArea value={colors} onChange={setColors} placeholder={"Enter the sizes, separated by a comma and a space ', '"} label={"Colors:"} />
                 <MultipleImageUplaod label={'Image Upload'} single={false} handleImageChange={handleImageChange} />
+                <StockMatrix stock={stock} setStock={setStock} sizes={sizes.split(', ').map(size => size.trim()).filter(el => el != "")} colors={colors.split(', ').map(size => size.trim()).filter(el => el != "")} />
                 <SimpleButton disabled={status == "loading"} submit={RequestSave} >Save   <FontAwesomeIcon icon={faCloudUploadAlt} /></SimpleButton>
             </form>
         </div>
